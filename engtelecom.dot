@@ -1,0 +1,195 @@
+digraph EngTelecom {
+    layout = dot  // circo, dot, fdp, neato, osage, sfdp, twopi
+    label ="Engenharia de Telecomunicações"
+    labelloc = t
+    graph [nodesep=0.3, ranksep=1.3]
+    node [labelloc=c fontsize=10, style=filled, shape=box, style="rounded,filled"]
+    edge [arrowsize=.5]
+
+
+    // Pré-requisitos
+
+    // Eixo laranja
+    {} -> ADM
+    {} -> DES
+    {} -> ESC
+    {} -> GAL
+    {} -> PCA
+    {} -> PTG
+    {} -> QMC1
+    {} -> SUS
+    {GAL} -> ALG
+    {PCA} -> CAL1
+    {CAL1} -> CAL2
+    {GAL CAL2} -> CAL3
+    {CAL2} -> CAL4
+    {ALG CAL2} -> CAN
+    {ADM} -> ECO
+    {CAL1} -> EST
+    {FSC2} -> FEN
+    {PCA} -> FSC1
+    {FSC1} -> FSC2
+    {FSC1 CAL3} -> FSC3
+    {CAL2 FSC1} -> MEC
+    {EST} -> MPQ
+    {QMC1} -> QMC2 # TODO a confirmar
+
+    // Eixo amarelo
+    {CAL1} -> CIE1
+    {CIE1 CAL2} -> CIE2
+    {CIE2} -> CIE3
+    {CIE2 LCI} -> ELA1
+    {CAL2 ELA1} -> ELA2
+    {ELA2} -> ELA3
+    {CIE1} -> LCI
+
+    // Eixo azul
+    {PRE} -> COM1
+    {COM1} -> COM2
+    {EST SIS} -> PRE 
+    {CAL2 ALG} -> SIS
+    {CAL4 SIS} -> PSD
+
+    // Eixo cinza
+    {} -> PJI1
+    {PJI1} -> PJI2
+    {STD} -> PJI2 [color="#ff0000" constraint=false]
+    {PJI2} -> PJI3
+    {MPQ PTG} -> TCC1 # TODO colocar CH como pré-requisito
+    {TCC1} -> TCC2
+
+    // Eixo marrom
+    {SOP MIC} -> DLP
+    {} -> ELD1
+    {ELD1} -> ELD2 # ELA1 como recomendada
+    {ELD2 PRG2} -> MIC # POO como co-requisito aí não precisa de PRG2 como pré
+    {POO MIC SOP} -> STE
+
+    // Eixo roxo
+    {MTG, EMG} -> ANT
+    {COM1 ANT} -> CRF # TODO
+    {ANT COM1} -> CSF
+    {FSC3 CAL3} -> EMG # TODO
+    {EMG FSC3} -> MTG
+    {MTG CSF} -> STC
+    {MTG} -> TLF # TODO
+
+    // Eixo verde claro
+    {ELD1 PRG1} -> RED1
+    {RED1}-> RED2
+    {PTC PRE} -> ADS
+
+    // Eixo verde escuro
+    {} -> LOG
+    {LOG} -> PRG1
+    {PRG1} -> PRG2
+    {PRG2} -> POO
+    {PRG2 MIC} -> SOP
+    {POO RED1 SOP} -> STD
+    {POO} -> BCD
+    {STD} -> PTC # RED2 como recomendada
+
+
+
+    subgraph clusterFase1 {
+        label = "Fase 1"
+        style = filled
+        color = lightgrey
+
+        LOG PCA GAL DES QMC1 PJI1 PTG ESC
+    }
+
+    subgraph cluster_fase2 {
+    label = "Fase 2"
+    style = filled
+    color = lightgrey
+
+    PRG1 CAL1 FSC1 ALG QMC2 SUS 
+
+  }
+
+
+    // propriedades dos nós
+
+
+    ADM [ch=40, color="#FFA343", id=ADM] # TODO pré-requisito 1980h
+    ALG [ch=60, color="#FFA343", id=ALG]
+    CAL1 [ch=80, color="#FFA343", id=CAL1]
+    CAL2 [ch=80, color="#FFA343", id=CAL2]
+    CAL3 [ch=80, color="#FFA343", id=CAL3]
+    CAL4 [ch=40, color="#FFA343", id=CAL4]
+    CAN [ch=40, color="#FFA343", id=CAN]
+    DES [ch=40, color="#FFA343", id=DES]
+    ECO [ch=40, color="#FFA343", id=ECO]
+    ESC [ch=40, color="#FFA343", id=ESC]
+    EST [ch=60, color="#FFA343", id=EST]
+    FEN [ch=40, color="#FFA343", id=FEN]
+    FSC1 [ch=80, color="#FFA343", id=FSC1]
+    FSC2 [ch=80, color="#FFA343", id=FSC2]
+    FSC3 [ch=100, color="#FFA343", id=FSC3]
+    GAL [ch=80, color="#FFA343", id=GAL]
+    MEC [ch=40, color="#FFA343", id=MEC]
+    MPQ [ch=40, color="#FFA343", id=MPQ]
+    PCA [ch=80, color="#FFA343", id=PCA]
+    PTG [ch=40, color="#FFA343", id=PTG] # TODO pré-requisito 1980h
+    QMC1 [ch=60, color="#FFA343", id=QMC1]
+    QMC2 [ch=40, color="#FFA343", id=QMC2]
+    SUS [ch=40, color="#FFA343", id=SUS]
+
+
+
+    CIE1 [ch=80, color="#FFD700", id=CIE1]
+    CIE2 [ch=60, color="#FFD700", id=CIE2]
+    CIE3 [ch=60, color="#FFD700", id=CIE3]
+    ELA1 [ch=80, color="#FFD700", id=ELA1]
+    ELA2 [ch=80, color="#FFD700", id=ELA2]
+    ELA3 [ch=40, color="#FFD700", id=ELA3]
+    LCI  [ch=40, color="#FFD700", id=LCI ]
+
+
+    COM1 [ch=100, color="#007FFF", id=COM1]
+    COM2 [ch=80, color="#007FFF", id=COM2]
+    PRE [ch=80, color="#007FFF", id=PRE]
+    PSD [ch=80, color="#007FFF", id=PSD]
+    SIS [ch=100, color="#007FFF", id=SIS] # TODO, nada definido
+
+
+    ETO [ch=160, color="#808080", id=ETO]
+    PJI1 [ch=40, color="#808080", id=PJI1]
+    PJI2 [ch=40, color="#808080", id=PJI2]
+    PJI3 [ch=40, color="#808080", id=PJI3]
+    TCC1 [ch=40, color="#808080", id=TCC1]
+    TCC2 [ch=100, color="#808080", id=TCC2]
+
+
+    DLP [ch=60, color="#9F8170", id=DLP]
+    ELD1 [ch=100, color="#9F8170", id=ELD1]
+    ELD2 [ch=100, color="#9F8170", id=ELD2]
+    MIC [ch=120, color="#9F8170", id=MIC]
+    STE [ch=80, color="#9F8170", id=STE]
+
+
+    ANT [ch=80, color="#9678B6", id=ANT]
+    CRF [ch=60, color="#9678B6", id=CRF]
+    CSF [ch=60, color="#9678B6", id=CSF]
+    EMG [ch=60, color="#9678B6", id=EMG] # TODO, nada definido
+    MTG [ch=80, color="#9678B6", id=MTG]
+    STC [ch=60, color="#9678B6", id=STC]
+    TLF [ch=60, color="#9678B6", id=TLF] # TODO, nada definido
+
+
+    ADS [ch=40, color="#77DD77", id=ADS]
+    RED1 [ch=80, color="#77DD77", id=RED1]
+    RED2 [ch=80, color="#77DD77", id=RED2]
+
+
+    BCD [ch=60, color="#339966", id=BCD]
+    LOG [ch=40, color="#339966", id=LOG]
+    POO [ch=80, color="#339966", id=POO]
+    PRG1 [ch=80, color="#339966", id=PRG1]
+    PRG2 [ch=80, color="#339966", id=PRG2]
+    PTC [ch=40, color="#339966", id=PTC]
+    SOP [ch=80, color="#339966", id=SOP]
+    STD [ch=60, color="#339966", id=STD]
+
+}
