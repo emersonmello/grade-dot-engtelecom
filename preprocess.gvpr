@@ -1,0 +1,19 @@
+// preprocess.gvpr
+// $ gvpr ppc-2020.dot -c -f preprocess.gvpr -o ppc-2020-ch.dot
+
+BEG_G {
+    graph_t subgraph = fstsubg($);
+    while (subgraph != NULL) {
+        int ch_eixo = 0;
+        node_t n = fstnode(subgraph);
+        while (n != NULL) {
+            ch_eixo += n.ch;
+            //n.width = n.ch / 30;
+
+            n.label = sprintf("%s\n(%d)", n.id, (n.ch/20));
+            n = nxtnode_sg(subgraph, n);
+        }
+        subgraph.label = sprintf("%s [%d h] - %d", subgraph.label, ch_eixo,(ch_eixo/20));
+        subgraph = nxtsubg(subgraph);
+    }
+}
