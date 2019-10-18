@@ -18,8 +18,9 @@ digraph EngTelecom {
     {} -> PTG
     {} -> QMC1
     {} -> SUS
+
     {GAL} -> ALG
-    {PCA} -> CAL1
+    // {PCA} -> CAL1
     {CAL1} -> CAL2
     {GAL CAL2} -> CAL3
     {CAL2} -> CAL4
@@ -37,7 +38,7 @@ digraph EngTelecom {
     // Eixo amarelo
     {CAL1} -> CIE1
     {CIE1 CAL2} -> CIE2
-    {CIE2} -> CIE3
+    {CIE2 SIS} -> CIE3 # TODO verificar
     {CIE2 LCI} -> ELA1
     {CAL2 ELA1} -> ELA2
     {ELA2} -> ELA3
@@ -52,9 +53,9 @@ digraph EngTelecom {
 
     // Eixo cinza
     {} -> PJI1
-    {PJI1} -> PJI2
-    {STD} -> PJI2 [color="#ff0000" constraint=false]
+    {PJI1} -> PJI2 # TODO colocar STD como pré-requisito
     {PJI2} -> PJI3
+    {STD} -> PJI2 [color="#FF0000" constraint=false]
     {MPQ PTG} -> TCC1 # TODO colocar CH como pré-requisito
     {TCC1} -> TCC2
 
@@ -70,7 +71,7 @@ digraph EngTelecom {
     {COM1 ANT} -> CRF # TODO
     {ANT COM1} -> CSF
     {FSC3 CAL3} -> EMG # TODO
-    {EMG FSC3} -> MTG
+    {EMG} -> MTG # TODO
     {MTG CSF} -> STC
     {MTG} -> TLF # TODO
 
@@ -91,22 +92,97 @@ digraph EngTelecom {
 
 
 
-    subgraph clusterFase1 {
+    // Fases
+
+    subgraph cluster_fase1 {
         label = "Fase 1"
         style = filled
         color = lightgrey
 
-        LOG PCA GAL DES QMC1 PJI1 PTG ESC
+        {PCA} -> CAL1 [constraint=false,color="#FF0000"]
+        LOG GAL DES QMC1 PTG PJI1
     }
 
     subgraph cluster_fase2 {
-    label = "Fase 2"
-    style = filled
-    color = lightgrey
+        label = "Fase 2"
+        style = filled
+        color = lightgrey
 
-    PRG1 CAL1 FSC1 ALG QMC2 SUS 
+        PRG1 CAL2 FSC1 ALG QMC2 SUS CIE1
+    }
 
-  }
+    subgraph cluster_fase3 {
+        label = "Fase 3"
+        style = filled
+        color = lightgrey
+
+        PRG2 CAL3 FSC2 ELD1 CIE2 MEC LCI
+    }
+
+    subgraph cluster_fase4 {
+        label = "Fase 4"
+        style=filled
+        color=lightgrey
+        node [style=filled,color=white]
+
+        POO RED1 MEC ELD2 FSC3 CAN CAL4  
+    }
+
+    subgraph cluster_fase5 {
+        label = "Fase 5"
+        style=filled
+        color=lightgrey
+        node [style=filled,color=white]
+
+        SIS EST  RED2 EMG  ELA1  MIC
+    }
+
+    subgraph cluster_fase6 {
+        label = "Fase 6"
+        style=filled
+        color=lightgrey
+        node [style=filled,color=white]
+
+        SOP BCD ELA2 MTG PRE CIE3 ADM
+    }
+
+    subgraph cluster_fase7 {
+        label = "Fase 7"
+        style=filled
+        color=lightgrey
+        node [style=filled,color=white]
+    
+        
+        STD PJI2 PSD ANT STE COM1 ECO
+       
+    }
+
+    subgraph cluster_fase8 {
+        label = "Fase 8"
+        style=filled
+        color=lightgrey
+        node [style=filled,color=white]
+
+        MPQ CSF COM2 PTC ELA3 DLP ESC BCD 
+    }
+
+    subgraph cluster_fase9 {
+        label = "Fase 9"
+        style=filled
+        color=lightgrey
+        node [style=filled,color=white]
+
+        ADS PJI3 TCC1 STC CRF TLF FEN
+    }
+
+    subgraph cluster_fase10 {
+        label = "Fase 10"
+        style=filled
+        color=lightgrey
+        node [style=filled,color=white]
+
+        TCC2 ETO
+    }
 
 
     // propriedades dos nós
