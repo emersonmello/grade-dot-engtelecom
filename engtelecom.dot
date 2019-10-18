@@ -20,7 +20,7 @@ digraph EngTelecom {
     {} -> SUS
 
     {GAL} -> ALG
-    // {PCA} -> CAL1
+    {PCA} -> CAL1 [constraint=false,color="#FF0000"]
     {CAL1} -> CAL2
     {GAL CAL2} -> CAL3
     {CAL2} -> CAL4
@@ -32,14 +32,14 @@ digraph EngTelecom {
     {FSC1} -> FSC2
     {FSC1 CAL3} -> FSC3
     {CAL2 FSC1} -> MEC
-    {EST} -> MPQ
+    {EST PJI2 PTG} -> MPQ # TODO verificar se PJI2 e PTG devem ser pré-requisito
     {QMC1} -> QMC2 # TODO a confirmar
 
     // Eixo amarelo
     {CAL1} -> CIE1
     {CIE1 CAL2} -> CIE2
     {CIE2 SIS} -> CIE3 # TODO verificar
-    {CIE2 LCI} -> ELA1
+    {CIE2 LCI QMC1} -> ELA1 # TODO verificar
     {CAL2 ELA1} -> ELA2
     {ELA2} -> ELA3
     {CIE1} -> LCI
@@ -54,17 +54,17 @@ digraph EngTelecom {
     // Eixo cinza
     {} -> PJI1
     {PJI1} -> PJI2 # TODO colocar STD como pré-requisito
-    {PJI2} -> PJI3
     {STD} -> PJI2 [color="#FF0000" constraint=false]
-    {MPQ PTG} -> TCC1 # TODO colocar CH como pré-requisito
+    {PJI2} -> PJI3
+    {MPQ PJI3} -> TCC1 # TODO colocar CH como pré-requisito - tirei PTG
     {TCC1} -> TCC2
 
     // Eixo marrom
     {SOP MIC} -> DLP
     {} -> ELD1
     {ELD1} -> ELD2 # ELA1 como recomendada
-    {ELD2 PRG2} -> MIC # POO como co-requisito aí não precisa de PRG2 como pré
-    {POO MIC SOP} -> STE
+    {ELD2 POO} -> MIC
+    {MIC SOP} -> STE # TODO POO foi para pré-requisito de MIC
 
     // Eixo roxo
     {MTG, EMG} -> ANT
@@ -82,7 +82,7 @@ digraph EngTelecom {
 
     // Eixo verde escuro
     {} -> LOG
-    {LOG} -> PRG1
+    {LOG} -> PRG1 [color="#FF0000" constraint=false]
     {PRG1} -> PRG2
     {PRG2} -> POO
     {PRG2 MIC} -> SOP
@@ -95,95 +95,97 @@ digraph EngTelecom {
     // Fases
 
     subgraph cluster_fase1 {
-        label = "Fase 1"
-        style = filled
-        color = lightgrey
+      label = "Fase 1"
+      style = filled
+      color = lightgrey
 
-        {PCA} -> CAL1 [constraint=false,color="#FF0000"]
-        LOG GAL DES QMC1 PTG PJI1
+      LOG GAL DES PJI1 PTG PRG1 CAL1 PCA
     }
 
     subgraph cluster_fase2 {
-        label = "Fase 2"
-        style = filled
-        color = lightgrey
+      label = "Fase 2"
+      style = filled
+      color = lightgrey
 
-        PRG1 CAL2 FSC1 ALG QMC2 SUS CIE1
+      CAL2 FSC1 ALG ELD1 CIE1 PRG2
     }
 
-    subgraph cluster_fase3 {
-        label = "Fase 3"
-        style = filled
-        color = lightgrey
+    subgraph clusterFase3 {
+      label = "Fase 3"
+      style = filled
+      color = lightgrey
 
-        PRG2 CAL3 FSC2 ELD1 CIE2 MEC LCI
+      CAL3 FSC2 CIE2 MEC LCI POO ELD2
     }
 
-    subgraph cluster_fase4 {
-        label = "Fase 4"
-        style=filled
-        color=lightgrey
-        node [style=filled,color=white]
+    subgraph clusterFase4 {
+      label = "Fase 4"
+      style=filled
+      color=lightgrey
+      node [style=filled,color=white]
 
-        POO RED1 MEC ELD2 FSC3 CAN CAL4  
+      RED1 MEC FSC3 BCD CAL4  MIC QMC1 
     }
 
     subgraph cluster_fase5 {
-        label = "Fase 5"
-        style=filled
-        color=lightgrey
-        node [style=filled,color=white]
+      label = "Fase 5"
+      style=filled
+      color=lightgrey
+      node [style=filled,color=white]
 
-        SIS EST  RED2 EMG  ELA1  MIC
+      SIS EST RED2 EMG  ELA1  SOP
     }
 
-    subgraph cluster_fase6 {
-        label = "Fase 6"
-        style=filled
-        color=lightgrey
-        node [style=filled,color=white]
 
-        SOP BCD ELA2 MTG PRE CIE3 ADM
+    subgraph cluster_fase6 {
+      label = "Fase 6"
+      style=filled
+      color=lightgrey
+      node [style=filled,color=white]
+
+      ELA2 MTG PRE CIE3  PJI2 STD QMC2
     }
 
     subgraph cluster_fase7 {
-        label = "Fase 7"
-        style=filled
-        color=lightgrey
-        node [style=filled,color=white]
-    
-        
-        STD PJI2 PSD ANT STE COM1 ECO
-       
+      label = "Fase 7"
+      style=filled
+      color=lightgrey
+      node [style=filled,color=white]
+
+      PSD ANT STE COM1 CAN PTC ADM
     }
 
     subgraph cluster_fase8 {
-        label = "Fase 8"
-        style=filled
-        color=lightgrey
-        node [style=filled,color=white]
+      label = "Fase 8"
+      style=filled
+      color=lightgrey
+      node [style=filled,color=white]
 
-        MPQ CSF COM2 PTC ELA3 DLP ESC BCD 
+      MPQ CSF COM2 ELA3 DLP ESC BCD PJI3 ECO
     }
 
     subgraph cluster_fase9 {
-        label = "Fase 9"
-        style=filled
-        color=lightgrey
-        node [style=filled,color=white]
+      label = "Fase 9"
+      style=filled
+      color=lightgrey
+      node [style=filled,color=white]
 
-        ADS PJI3 TCC1 STC CRF TLF FEN
+      ADS  TCC1 STC CRF TLF FEN SUS 
     }
 
     subgraph cluster_fase10 {
-        label = "Fase 10"
-        style=filled
-        color=lightgrey
-        node [style=filled,color=white]
+      label = "Fase 10"
+      style=filled
+      color=lightgrey
+      node [style=filled,color=white]
 
-        TCC2 ETO
+      TCC2 ETO
     }
 
+
+      // expressão regular
+      // (\w{3,4}) (\[ch=\d{2,3}) - find
+      // $1 $2, color="#FFA343, id=$1 - replace
 
     // propriedades dos nós
 
