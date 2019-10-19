@@ -30,7 +30,7 @@ digraph EngTelecom {
     {FSC2} -> FEN
     {PCA} -> FSC1
     {FSC1} -> FSC2
-    {FSC1 CAL3} -> FSC3
+    {FSC1 CAL2} -> FSC3
     {CAL2 FSC1} -> MEC
     {EST PJI2 PTG} -> MPQ # TODO verificar se PJI2 e PTG devem ser pré-requisito
     {QMC1} -> QMC2 # TODO a confirmar
@@ -47,7 +47,7 @@ digraph EngTelecom {
     // Eixo azul
     {PRE} -> COM1
     {COM1} -> COM2
-    {EST SIS} -> PRE 
+    {EST SIS} -> PRE
     {CAL2 ALG} -> SIS
     {CAL4 SIS} -> PSD
 
@@ -124,7 +124,7 @@ digraph EngTelecom {
       color=lightgrey
       node [style=filled,color=white]
 
-      RED1 MEC FSC3 BCD CAL4  MIC QMC1 
+      RED1 MEC FSC3 BCD CAL4  MIC QMC1
     }
 
     subgraph cluster_fase5 {
@@ -170,7 +170,7 @@ digraph EngTelecom {
       color=lightgrey
       node [style=filled,color=white]
 
-      ADS  TCC1 STC CRF TLF FEN SUS 
+      ADS  TCC1 STC CRF TLF FEN SUS
     }
 
     subgraph cluster_fase10 {
