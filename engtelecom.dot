@@ -38,18 +38,19 @@ digraph EngTelecom {
     // Eixo amarelo
     {CAL1} -> CIE1
     {CIE1 CAL2} -> CIE2
-    {CIE2 SIS} -> CIE3 # TODO verificar
+    {CIE2 SIS2} -> CIE3 # TODO verificar
     {CIE2 LCI QMC1} -> ELA1 # TODO verificar
-    {CAL2 ELA1} -> ELA2
+    {CAL2 ELA1 SIS2} -> ELA2
     {ELA2} -> ELA3
     {CIE1} -> LCI
 
     // Eixo azul
     {PRE} -> COM1
     {COM1} -> COM2
-    {EST SIS} -> PRE
-    {CAL2 ALG} -> SIS
-    {CAL4 SIS} -> PSD
+    {EST SIS1} -> PRE
+    {CAL2 ALG} -> SIS1
+    {SIS1} -> SIS2
+    {CAL4 SIS2} -> PSD
 
     // Eixo cinza
     {} -> PJI1
@@ -133,7 +134,7 @@ digraph EngTelecom {
       color=lightgrey
       node [style=filled,color=white]
 
-      SIS EST RED2 EMG  ELA1  SOP
+      SIS1 EST RED2 EMG  ELA1  SOP
     }
 
 
@@ -143,7 +144,7 @@ digraph EngTelecom {
       color=lightgrey
       node [style=filled,color=white]
 
-      ELA2 MTG PRE CIE3  PJI2 STD QMC2
+      SIS2 MTG PRE   PJI2 STD QMC2
     }
 
     subgraph cluster_fase7 {
@@ -152,7 +153,7 @@ digraph EngTelecom {
       color=lightgrey
       node [style=filled,color=white]
 
-      PSD ANT STE COM1 CAN PTC ADM
+      ELA2 CIE3 PSD ANT STE COM1 CAN PTC ADM
     }
 
     subgraph cluster_fase8 {
@@ -229,7 +230,8 @@ digraph EngTelecom {
     COM2 [ch=80, color="#007FFF", id=COM2]
     PRE [ch=80, color="#007FFF", id=PRE]
     PSD [ch=80, color="#007FFF", id=PSD]
-    SIS [ch=100, color="#007FFF", id=SIS] # TODO, nada definido
+    SIS1 [ch=100, color="#007FFF", id=SIS1] # TODO, nada definido
+    SIS2 [ch=100, color="#007FFF", id=SIS2] # TODO, nada definido
 
 
     ETO [ch=160, color="#808080", id=ETO]
