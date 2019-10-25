@@ -2,7 +2,7 @@ digraph EngTelecom {
     layout = dot  // circo, dot, fdp, neato, osage, sfdp, twopi
     label ="Engenharia de Telecomunicações"
     labelloc = t
-    graph [nodesep=0.3, ranksep=1.3]
+    graph [nodesep=0.3, ranksep=1.3, splines=lines] # ortho
     node [labelloc=c fontsize=10, style=filled, shape=box, style="rounded,filled"]
     edge [arrowsize=.5]
 
@@ -10,53 +10,55 @@ digraph EngTelecom {
     // Pré-requisitos
 
     // Eixo laranja
-    {} -> ADM
+    {"1980h"} -> ADM
     {} -> DES
     {} -> ESC
-    {} -> GAL
-    {} -> PCA
     {} -> PTG
     {} -> QMC1
     {} -> SUS
+    {ADM} -> ECO
+    {CAL1} -> EST
+    {FSC2} -> FEN
+    {CAL2 FSC1} -> MEC
+    {EST} -> MPQ # TODO verificar se PJI2 e PTG devem ser pré-requisito
+    {QMC1} -> QMC2
 
+    {} -> PCA
+    {} -> GAL
     {GAL} -> ALG
-    {PCA} -> CAL1 [constraint=false,color="#FF0000"]
+    {PCA} -> CAL1 #[constraint=false,color="#FF0000"]
     {CAL1} -> CAL2
     {GAL CAL2} -> CAL3
     {CAL2} -> CAL4
     {ALG CAL2} -> CAN
-    {ADM} -> ECO
-    {CAL1} -> EST
-    {FSC2} -> FEN
     {PCA} -> FSC1
     {FSC1} -> FSC2
     {FSC1 CAL2} -> FSC3
-    {CAL2 FSC1} -> MEC
-    {EST PJI2 PTG} -> MPQ # TODO verificar se PJI2 e PTG devem ser pré-requisito
-    {QMC1} -> QMC2 # TODO a confirmar
+    
 
     // Eixo amarelo
-    {CAL1} -> CIE1
+    {CAL1 ALG FSC3} -> CIE1
     {CIE1 CAL2} -> CIE2
     {CIE2 SIS2} -> CIE3 # TODO verificar
     {CIE2 LCI QMC1} -> ELA1 # TODO verificar
-    {CAL2 ELA1 SIS2} -> ELA2
-    {ELA2} -> ELA3
-    {CIE1} -> LCI
+    {CAL2 CIE2 ELA1 SIS2} -> ELA2
+    {ELA2 CIE3} -> ELA3
+    {CIE1 SIS1} -> LCI
 
     // Eixo azul
-    {PRE} -> COM1
-    {COM1} -> COM2
-    {EST SIS1} -> PRE
-    {CAL2 ALG} -> SIS1
+    {PRE} -> COM1 # recomendada: sis2
+    {COM1} -> COM2 # recomendada: PSD
+    {EST SIS1} -> PRE # recomendada: PRG1, CAL4
+    {CAL2 ALG CAL4} -> SIS1
     {SIS1} -> SIS2
-    {CAL4 SIS2} -> PSD
+    {CAL4 SIS2} -> PSD  # recomendada: CAN
 
     // Eixo cinza
     {} -> PJI1
-    {PJI1} -> PJI2 # TODO colocar STD como pré-requisito
+    {PJI1 RED2 MIC} -> PJI2 # TODO colocar STD como pré-requisito
     {STD} -> PJI2 [color="#FF0000" constraint=false]
-    {PJI2} -> PJI3
+    {PJI2 ANT ELA2 PSD COM1} -> PJI3 # recomendada DLP
+    {STE} -> PJI3 [color="#FF0000" constraint=false]
     {MPQ PJI3} -> TCC1 # TODO colocar CH como pré-requisito - tirei PTG
     {TCC1} -> TCC2
 
@@ -64,17 +66,21 @@ digraph EngTelecom {
     {SOP MIC} -> DLP
     {} -> ELD1
     {ELD1} -> ELD2 # ELA1 como recomendada
-    {ELD2 POO} -> MIC
-    {MIC SOP} -> STE # TODO POO foi para pré-requisito de MIC
+    {ELD2 PRG2} -> MIC
+    {POO} -> MIC [color="#FF0000" constraint=false]
+    {MIC SOP POO} -> STE
 
     // Eixo roxo
-    {MTG, EMG} -> ANT
-    {COM1 ANT} -> CRF # TODO
+    {MTG} -> ANT
+    {COM1} -> ANT [color="#FF0000" constraint=false]
+    {COM1 ANT ELA3} -> CRF # recomendada CSF
+    {STC} -> CRF [color="#FF0000" constraint=false]
     {ANT COM1} -> CSF
-    {FSC3 CAL3} -> EMG # TODO
-    {EMG} -> MTG # TODO
-    {MTG CSF} -> STC
-    {MTG} -> TLF # TODO
+    {FSC3 CAL3} -> EMG
+    {EMG} -> MTG # recomendada: CAL4
+    {CSF} -> STC
+    {CRF} -> STC [color="#FF0000" constraint=false]
+    {MTG SIS1} -> TLF 
 
     // Eixo verde claro
     {ELD1 PRG1} -> RED1
@@ -83,7 +89,8 @@ digraph EngTelecom {
 
     // Eixo verde escuro
     {} -> LOG
-    {LOG} -> PRG1 [color="#FF0000" constraint=false]
+    // {LOG} -> PRG1 [color="#FF0000" constraint=false]
+    {} -> PRG1
     {PRG1} -> PRG2
     {PRG2} -> POO
     {PRG2 MIC} -> SOP
@@ -123,7 +130,6 @@ digraph EngTelecom {
       label = "Fase 4"
       style=filled
       color=lightgrey
-      node [style=filled,color=white]
 
       RED1 MEC FSC3 BCD CAL4  MIC QMC1
     }
@@ -132,7 +138,6 @@ digraph EngTelecom {
       label = "Fase 5"
       style=filled
       color=lightgrey
-      node [style=filled,color=white]
 
       SIS1 EST RED2 EMG  ELA1  SOP
     }
@@ -142,7 +147,6 @@ digraph EngTelecom {
       label = "Fase 6"
       style=filled
       color=lightgrey
-      node [style=filled,color=white]
 
       SIS2 MTG PRE   PJI2 STD QMC2
     }
@@ -151,7 +155,6 @@ digraph EngTelecom {
       label = "Fase 7"
       style=filled
       color=lightgrey
-      node [style=filled,color=white]
 
       ELA2 CIE3 PSD ANT STE COM1 CAN PTC ADM
     }
@@ -160,7 +163,6 @@ digraph EngTelecom {
       label = "Fase 8"
       style=filled
       color=lightgrey
-      node [style=filled,color=white]
 
       MPQ CSF COM2 ELA3 DLP ESC BCD PJI3 ECO
     }
@@ -169,7 +171,6 @@ digraph EngTelecom {
       label = "Fase 9"
       style=filled
       color=lightgrey
-      node [style=filled,color=white]
 
       ADS  TCC1 STC CRF TLF FEN SUS
     }
@@ -178,7 +179,6 @@ digraph EngTelecom {
       label = "Fase 10"
       style=filled
       color=lightgrey
-      node [style=filled,color=white]
 
       TCC2 ETO
     }
@@ -205,11 +205,11 @@ digraph EngTelecom {
     FEN [ch=40, color="#FFA343", id=FEN]
     FSC1 [ch=80, color="#FFA343", id=FSC1]
     FSC2 [ch=80, color="#FFA343", id=FSC2]
-    FSC3 [ch=100, color="#FFA343", id=FSC3]
-    GAL [ch=80, color="#FFA343", id=GAL]
+    FSC3 [ch=100, color="#FFA343", id=FSC3] # TODO verificar se terá redução de CH
+    GAL [ch=60, color="#FFA343", id=GAL]
     MEC [ch=40, color="#FFA343", id=MEC]
     MPQ [ch=40, color="#FFA343", id=MPQ]
-    PCA [ch=80, color="#FFA343", id=PCA]
+    PCA [ch=40, color="#FFA343", id=PCA]
     PTG [ch=40, color="#FFA343", id=PTG] # TODO pré-requisito 1980h
     QMC1 [ch=60, color="#FFA343", id=QMC1]
     QMC2 [ch=40, color="#FFA343", id=QMC2]
@@ -229,9 +229,9 @@ digraph EngTelecom {
     COM1 [ch=100, color="#007FFF", id=COM1]
     COM2 [ch=80, color="#007FFF", id=COM2]
     PRE [ch=80, color="#007FFF", id=PRE]
-    PSD [ch=80, color="#007FFF", id=PSD]
-    SIS1 [ch=100, color="#007FFF", id=SIS1] # TODO, nada definido
-    SIS2 [ch=100, color="#007FFF", id=SIS2] # TODO, nada definido
+    PSD [ch=60, color="#007FFF", id=PSD]
+    SIS1 [ch=60, color="#007FFF", id=SIS1]
+    SIS2 [ch=60, color="#007FFF", id=SIS2]
 
 
     ETO [ch=160, color="#808080", id=ETO]
@@ -245,17 +245,17 @@ digraph EngTelecom {
     DLP [ch=60, color="#9F8170", id=DLP]
     ELD1 [ch=100, color="#9F8170", id=ELD1]
     ELD2 [ch=100, color="#9F8170", id=ELD2]
-    MIC [ch=120, color="#9F8170", id=MIC]
+    MIC [ch=100, color="#9F8170", id=MIC]
     STE [ch=80, color="#9F8170", id=STE]
 
 
     ANT [ch=80, color="#9678B6", id=ANT]
     CRF [ch=60, color="#9678B6", id=CRF]
     CSF [ch=60, color="#9678B6", id=CSF]
-    EMG [ch=60, color="#9678B6", id=EMG] # TODO, nada definido
+    EMG [ch=60, color="#9678B6", id=EMG]
     MTG [ch=80, color="#9678B6", id=MTG]
     STC [ch=60, color="#9678B6", id=STC]
-    TLF [ch=60, color="#9678B6", id=TLF] # TODO, nada definido
+    TLF [ch=80, color="#9678B6", id=TLF]
 
 
     ADS [ch=40, color="#77DD77", id=ADS]
