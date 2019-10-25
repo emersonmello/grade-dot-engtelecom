@@ -34,7 +34,7 @@ digraph EngTelecom {
     {PCA} -> FSC1
     {FSC1} -> FSC2
     {FSC1 CAL2} -> FSC3
-    
+
 
     // Eixo amarelo
     {CAL1 ALG FSC3} -> CIE1
@@ -75,12 +75,12 @@ digraph EngTelecom {
     {COM1} -> ANT [color="#FF0000" constraint=false]
     {COM1 ANT ELA3} -> CRF # recomendada CSF
     {STC} -> CRF [color="#FF0000" constraint=false]
-    {ANT COM1} -> CSF
+    {ANT} -> CSF # recomendada: COM1
     {FSC3 CAL3} -> EMG
     {EMG} -> MTG # recomendada: CAL4
     {CSF} -> STC
     {CRF} -> STC [color="#FF0000" constraint=false]
-    {MTG SIS1} -> TLF 
+    {MTG SIS1} -> TLF
 
     // Eixo verde claro
     {ELD1 PRG1} -> RED1
