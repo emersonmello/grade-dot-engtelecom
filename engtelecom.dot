@@ -2,15 +2,21 @@ digraph EngTelecom {
     layout = dot  // circo, dot, fdp, neato, osage, sfdp, twopi
     label ="Engenharia de Telecomunicações"
     labelloc = t
-    graph [nodesep=0.3, ranksep=1.3, splines=lines] # ortho
-    node [labelloc=c fontsize=10, style=filled, shape=box, style="rounded,filled"]
-    edge [arrowsize=.5]
-
+    // graph [nodesep=0.3, ranksep=1.3]#, splines=ortho]#, splines=lines] # ortho
+    // node [labelloc=c fontsize=10, style=filled, shape=box, style="rounded,filled"]
+    // edge [arrowsize=.5]
+   
+    // bgcolor="#2e3e56"
+	  pad="0.5" /* add padding round the edge of the graph */
+    graph [nodesep=0.3, ranksep=1.3, fontname="helvetica Neue Ultra Light", fontcolor="#000000" fontsize=25]
+    node [shape="circle", width=".8", style="filled", labelloc=c, fontname="helvetica Neue Ultra Light bold"fixedsize=true]
+    // edge [color="#fcfcfc", penwidth="2", fontname="helvetica Neue Ultra Light"]
+    edge [color="#000000", penwidth="2", fontname="helvetica Neue Ultra Light"]
 
     // Pré-requisitos
 
     // Eixo laranja
-    {"1980h"} -> ADM
+    {"horas1980"} -> ADM
     {} -> DES
     {} -> ESC
     {} -> PTG
@@ -104,7 +110,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase1 {
       label = "Fase 1"
-      style = filled
+      // style = filled
+      style="rounded"
+      bgcolor= "#e6e6e6" #"#5b6e8b"
       color = lightgrey
 
       LOG GAL DES PJI1 PTG PRG1 CAL1 PCA
@@ -112,7 +120,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase2 {
       label = "Fase 2"
-      style = filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style = filled
       color = lightgrey
 
       CAL2 FSC1 ALG ELD1 CIE1 PRG2
@@ -120,7 +130,9 @@ digraph EngTelecom {
 
     subgraph clusterFase3 {
       label = "Fase 3"
-      style = filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style = filled
       color = lightgrey
 
       CAL3 FSC2 CIE2 MEC LCI POO ELD2
@@ -128,7 +140,9 @@ digraph EngTelecom {
 
     subgraph clusterFase4 {
       label = "Fase 4"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       RED1 MEC FSC3 BCD CAL4  MIC QMC1
@@ -136,7 +150,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase5 {
       label = "Fase 5"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       SIS1 EST RED2 EMG  ELA1  SOP
@@ -145,7 +161,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase6 {
       label = "Fase 6"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       SIS2 MTG PRE   PJI2 STD QMC2
@@ -153,7 +171,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase7 {
       label = "Fase 7"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       ELA2 CIE3 PSD ANT STE COM1 CAN PTC ADM
@@ -161,7 +181,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase8 {
       label = "Fase 8"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       MPQ CSF COM2 ELA3 DLP ESC BCD PJI3 ECO
@@ -169,7 +191,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase9 {
       label = "Fase 9"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       ADS  TCC1 STC CRF TLF FEN SUS
@@ -177,7 +201,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase10 {
       label = "Fase 10"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       TCC2 ETO
@@ -190,6 +216,7 @@ digraph EngTelecom {
 
     // propriedades dos nós
 
+    horas1980 [label="1980h", color="#5b6e8b", id="1980h"]
 
     ADM [ch=40, color="#FFA343", id=ADM] # TODO pré-requisito 1980h
     ALG [ch=60, color="#FFA343", id=ALG]
