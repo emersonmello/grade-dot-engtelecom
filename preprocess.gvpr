@@ -1,12 +1,19 @@
 // preprocess.gvpr
 // $ gvpr ppc-2020.dot -c -f preprocess.gvpr -o ppc-2020-ch.dot
 
+BEGIN { int tot_ch = 0;}
+
 BEG_G {
 
     node_t no = fstnode($);
 
     while (no != NULL){
         no.label = sprintf("%s\n(%d)", no.id, no.ch/20);
+
+        if ((strcmp(no.id,"TCC1"))&&(strcmp(no.id,"TCC2"))&&(strcmp(no.id,"ETO")) ){
+            tot_ch+=no.ch;
+        }
+
         no = nxtnode(no);
     }
 
@@ -22,4 +29,6 @@ BEG_G {
         subgraph.label = sprintf("%s [%d h] - %d", subgraph.label, ch_eixo,(ch_eixo/20));
         subgraph = nxtsubg(subgraph);
     }
+    label = sprintf("%s\n Carga horária total: %d (não inclui ETO, TCC1 e TCC2)",label,tot_ch);
 }
+//END { printf ("Carga horária total: %d \n", tot_ch) }
