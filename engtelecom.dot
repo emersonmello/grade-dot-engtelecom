@@ -8,8 +8,8 @@ digraph EngTelecom {
    
     // bgcolor="#2e3e56"
 	  pad="0.5" /* add padding round the edge of the graph */
-    graph [nodesep=0.3, ranksep=1.6, fontname="helvetica Neue Ultra Light" ,fontsize=40, fontcolor="#000000"]
-    node [shape="circle", width="1.3", style="filled", labelloc=c, fontname="helvetica Neue Ultra Light bold" fontsize=30 fixedsize=true]
+    graph [nodesep=0.3, ranksep=1.3, fontname="helvetica Neue Ultra Light", fontcolor="#000000" fontsize=25]
+    node [shape="circle", width=".8", style="filled", labelloc=c, fontname="helvetica Neue Ultra Light bold"fixedsize=true]
     // edge [color="#fcfcfc", penwidth="2", fontname="helvetica Neue Ultra Light"]
     edge [color="#000000", penwidth="2", fontname="helvetica Neue Ultra Light"]
 
