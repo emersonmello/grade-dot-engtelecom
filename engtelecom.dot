@@ -16,7 +16,7 @@ digraph EngTelecom {
     // Pré-requisitos
 
     // Eixo laranja
-    {"horas1980"} -> ADM
+    {horas1980} -> ADM
     {} -> DES
     {} -> ESC
     {} -> PTG
@@ -63,8 +63,9 @@ digraph EngTelecom {
     {} -> PJI1
     {PJI1 RED2 MIC} -> PJI2 # TODO colocar STD como pré-requisito
     {STD} -> PJI2 [color="#FF0000" constraint=false]
-    {PJI2 ANT ELA2 PSD COM1} -> PJI3 # recomendada DLP
+    {PJI2 ANT PSD COM1} -> PJI3 # recomendada DLP # TODO Colocamos ELA2 como coreq
     {STE} -> PJI3 [color="#FF0000" constraint=false]
+    {ELA2}-> PJI3 [color="#FF0000" constraint=false]
     {MPQ PJI3} -> TCC1 # TODO colocar CH como pré-requisito - tirei PTG
     {TCC1} -> TCC2
 
@@ -115,7 +116,7 @@ digraph EngTelecom {
       bgcolor= "#e6e6e6" #"#5b6e8b"
       color = lightgrey
 
-      LOG GAL DES PJI1 PTG PRG1 CAL1 PCA
+      LOG PCA PJI1 GAL PTG DES PRG1 QMC1
     }
 
     subgraph cluster_fase2 {
@@ -125,7 +126,7 @@ digraph EngTelecom {
       // style = filled
       color = lightgrey
 
-      CAL2 FSC1 ALG ELD1 CIE1 PRG2
+      CAL1 FSC1 ALG ELD1 PRG2 QMC2
     }
 
     subgraph clusterFase3 {
@@ -135,7 +136,7 @@ digraph EngTelecom {
       // style = filled
       color = lightgrey
 
-      CAL3 FSC2 CIE2 MEC LCI POO ELD2
+      CAL2 FSC2 ELD2 POO RED1 ESC
     }
 
     subgraph clusterFase4 {
@@ -145,7 +146,8 @@ digraph EngTelecom {
       // style=filled
       color=lightgrey
 
-      RED1 MEC FSC3 BCD CAL4  MIC QMC1
+      RED2 MIC CAL3 FSC3 FEN CAN SUS 
+    
     }
 
     subgraph cluster_fase5 {
@@ -155,7 +157,7 @@ digraph EngTelecom {
       // style=filled
       color=lightgrey
 
-      SIS1 EST RED2 EMG  ELA1  SOP
+      CAL4 EMG CIE1 BCD SOP EST MEC
     }
 
 
@@ -166,7 +168,7 @@ digraph EngTelecom {
       // style=filled
       color=lightgrey
 
-      SIS2 MTG PRE   PJI2 STD QMC2
+      SIS1 CIE2 STD PJI2 MTG STE DLP
     }
 
     subgraph cluster_fase7 {
@@ -176,7 +178,7 @@ digraph EngTelecom {
       // style=filled
       color=lightgrey
 
-      ELA2 CIE3 PSD ANT STE COM1 CAN PTC ADM
+     LCI TLF PRE SIS2 PTC MPQ ADM
     }
 
     subgraph cluster_fase8 {
@@ -186,7 +188,7 @@ digraph EngTelecom {
       // style=filled
       color=lightgrey
 
-      MPQ CSF COM2 ELA3 DLP ESC BCD PJI3 ECO
+      ELA1 CIE3 ADS PSD COM1 ANT ECO
     }
 
     subgraph cluster_fase9 {
@@ -196,7 +198,7 @@ digraph EngTelecom {
       // style=filled
       color=lightgrey
 
-      ADS  TCC1 STC CRF TLF FEN SUS
+      COM2 ELA2 CSF PJI3 
     }
 
     subgraph cluster_fase10 {
@@ -206,7 +208,17 @@ digraph EngTelecom {
       // style=filled
       color=lightgrey
 
-      TCC2 ETO
+      STC ELA3 TCC1
+    }
+
+    subgraph cluster_fase11 {
+      label = "Fase 11"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
+      color=lightgrey
+
+      TCC2 ETO CRF
     }
 
 
