@@ -2,10 +2,16 @@ digraph EngTelecom {
     layout = dot  // circo, dot, fdp, neato, osage, sfdp, twopi
     label ="Engenharia de Telecomunicações"
     labelloc = t
-    graph [nodesep=0.3, ranksep=1.3]#, splines=ortho]#, splines=lines] # ortho
-    node [labelloc=c fontsize=10, style=filled, shape=box, style="rounded,filled"]
-    edge [arrowsize=.5]
-
+    // graph [nodesep=0.3, ranksep=1.3]#, splines=ortho]#, splines=lines] # ortho
+    // node [labelloc=c fontsize=10, style=filled, shape=box, style="rounded,filled"]
+    // edge [arrowsize=.5]
+   
+    // bgcolor="#2e3e56"
+	  pad="0.5" /* add padding round the edge of the graph */
+    graph [nodesep=0.3, ranksep=1.6, fontname="helvetica Neue Ultra Light" ,fontsize=40, fontcolor="#000000"]
+    node [shape="circle", width="1.3", style="filled", labelloc=c, fontname="helvetica Neue Ultra Light bold" fontsize=30 fixedsize=true]
+    // edge [color="#fcfcfc", penwidth="2", fontname="helvetica Neue Ultra Light"]
+    edge [color="#000000", penwidth="2", fontname="helvetica Neue Ultra Light"]
 
     // Pré-requisitos
 
@@ -105,7 +111,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase1 {
       label = "Fase 1"
-      style = filled
+      // style = filled
+      style="rounded"
+      bgcolor= "#e6e6e6" #"#5b6e8b"
       color = lightgrey
 
       LOG PCA PJI1 GAL PTG DES PRG1 QMC1
@@ -113,7 +121,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase2 {
       label = "Fase 2"
-      style = filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style = filled
       color = lightgrey
 
       CAL1 FSC1 ALG ELD1 PRG2 QMC2
@@ -121,7 +131,9 @@ digraph EngTelecom {
 
     subgraph clusterFase3 {
       label = "Fase 3"
-      style = filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style = filled
       color = lightgrey
 
       CAL2 FSC2 ELD2 POO RED1 ESC
@@ -129,7 +141,9 @@ digraph EngTelecom {
 
     subgraph clusterFase4 {
       label = "Fase 4"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       RED2 MIC CAL3 FSC3 FEN CAN SUS 
@@ -138,7 +152,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase5 {
       label = "Fase 5"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       CAL4 EMG CIE1 BCD SOP EST MEC
@@ -147,7 +163,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase6 {
       label = "Fase 6"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       SIS1 CIE2 STD PJI2 MTG STE DLP
@@ -155,7 +173,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase7 {
       label = "Fase 7"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
      LCI TLF PRE SIS2 PTC MPQ ADM
@@ -163,7 +183,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase8 {
       label = "Fase 8"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       ELA1 CIE3 ADS PSD COM1 ANT ECO
@@ -171,7 +193,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase9 {
       label = "Fase 9"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       COM2 ELA2 CSF PJI3 
@@ -179,7 +203,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase10 {
       label = "Fase 10"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       STC ELA3 TCC1
@@ -187,7 +213,9 @@ digraph EngTelecom {
 
     subgraph cluster_fase11 {
       label = "Fase 11"
-      style=filled
+      style="rounded"
+      bgcolor="#e6e6e6"
+      // style=filled
       color=lightgrey
 
       TCC2 ETO CRF
@@ -200,7 +228,7 @@ digraph EngTelecom {
 
     // propriedades dos nós
 
-    horas1980 [id="1980h"]
+    horas1980 [label="1980h", color="#5b6e8b", id="1980h"]
 
     ADM [ch=40, color="#FFA343", id=ADM] # TODO pré-requisito 1980h
     ALG [ch=60, color="#FFA343", id=ALG]
