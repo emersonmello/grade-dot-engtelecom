@@ -240,29 +240,29 @@ digraph EngTelecom {
     horas2940 [label="2940h", color="#5b6e8b", id="2940h"]
     horas1980 [label="1980h", color="#5b6e8b", id="1980h"]
 
-    ADM [ch=40, color="#FFA343", id=ADM, label="ADM \n(2)",  width=0.6] # TODO pré-requisito 1980h
-    ALG [ch=60, color="#FFA343", id=ALG, label="ALG \n(3)",  width=0.9]
+    ADM [ch=40, color="#FFA343", id=ADM, label="ADM \n(2) \n 1",  width=0.6] # TODO pré-requisito 1980h
+    ALG [ch=60, color="#FFA343", id=ALG, label="ALG \n(3) \n 2",  width=0.9]
     CAL1 [ch=80, color="#FFA343", id=CAL1, label="CAL1 \n(4) \n 1",  width=1.2]
     CAL2 [ch=80, color="#FFA343", id=CAL2, label="CAL2 \n(4) \n 2",  width=1.2]
     CAL3 [ch=80, color="#FFA343", id=CAL3, label="CAL3 \n(4) \n 3",  width=1.2]
     CAL4 [ch=40, color="#FFA343", id=CAL4, label="CAL4 \n(2) \n 3",  width=0.6]
-    CAN [ch=40, color="#FFA343", id=CAN, label="CAN \n(2)",  width=0.6]
-    DES [ch=40, color="#FFA343", id=DES, label="DES \n(2)",  width=0.6]
-    ECO [ch=40, color="#FFA343", id=ECO, label="ECO \n(2)",  width=0.6]
-    ESC [ch=40, color="#FFA343", id=ESC, label="ESC \n(2)",  width=0.6]
-    EST [ch=60, color="#FFA343", id=EST, label="EST \n(3)",  width=0.9]
-    FEN [ch=40, color="#FFA343", id=FEN, label="FEN \n(2)",  width=0.6]
+    CAN [ch=40, color="#FFA343", id=CAN, label="CAN \n(2) \n 3",  width=0.6]
+    DES [ch=40, color="#FFA343", id=DES, label="DES \n(2) \n 1",  width=0.6]
+    ECO [ch=40, color="#FFA343", id=ECO, label="ECO \n(2) \n 2",  width=0.6]
+    ESC [ch=40, color="#FFA343", id=ESC, label="ESC \n(2) \n 1",  width=0.6]
+    EST [ch=60, color="#FFA343", id=EST, label="EST \n(3) \n 2",  width=0.9]
+    FEN [ch=40, color="#FFA343", id=FEN, label="FEN \n(2) \n 3",  width=0.6]
     FSC1 [ch=80, color="#FFA343", id=FSC1, label="FSC1 \n(4) \n 1",  width=1.2]
-    FSC2 [ch=80, color="#FFA343", id=FSC2, label="FSC2 \n(4)",  width=1.2]
+    FSC2 [ch=80, color="#FFA343", id=FSC2, label="FSC2 \n(4) \n 2",  width=1.2]
     FSC3 [ch=100, color="#FFA343", id=FSC3, label="FSC3 \n(5) \n 3",  width=1.5] # TODO verificar se terá redução de CH
     GAL [ch=60, color="#FFA343", id=GAL, label="GAL \n(3) \n 1",  width=0.9]
-    MEC [ch=40, color="#FFA343", id=MEC, label="MEC \n(2)",  width=0.6]
-    MPQ [ch=40, color="#FFA343", id=MPQ, label="MPQ \n(2)",  width=0.6]
+    MEC [ch=40, color="#FFA343", id=MEC, label="MEC \n(2)\n 3",  width=0.6]
+    MPQ [ch=40, color="#FFA343", id=MPQ, label="MPQ \n(2) \n 3",  width=0.6]
     PCA [ch=40, color="#FFA343", id=PCA, label="PCA \n(2) \n 0",  width=0.6]
     PTG [ch=40, color="#FFA343", id=PTG, label="PTG \n(2)",  width=0.6] # TODO pré-requisito 1980h
-    QMC1 [ch=60, color="#FFA343", id=QMC1, label="QMC1 \n(3)",  width=0.9]
-    QMC2 [ch=40, color="#FFA343", id=QMC2, label="QMC2 \n(2)",  width=0.6]
-    SUS [ch=40, color="#FFA343", id=SUS, label="SUS \n(2)",  width=0.6]
+    QMC1 [ch=60, color="#FFA343", id=QMC1, label="QMC1 \n(3) \n 1",  width=0.9]
+    QMC2 [ch=40, color="#FFA343", id=QMC2, label="QMC2 \n(2) \n 2",  width=0.6]
+    SUS [ch=40, color="#FFA343", id=SUS, label="SUS \n(2) \n 1",  width=0.6]
 
 
 
@@ -284,20 +284,19 @@ digraph EngTelecom {
     SIS2 [ch=60, color="#007FFF", id=SIS2, label="SIS2 \n(3) \n 5",  width=0.9]
 
 
-    ETO [ch=160, color="#808080", id=ETO, label="ETO \n(8)",  width=2.4]
-    PJI1 [ch=40, color="#808080", id=PJI1, label="PJI1 \n(2)",  width=0.6]
-    PJI2 [ch=40, color="#808080", id=PJI2, label="PJI2 \n(2)",  width=0.6]
+    ETO [ch=160, color="#808080", id=ETO, label="ETO \n(8) \n 1",  width=2.4]
+    PJI1 [ch=40, color="#808080", id=PJI1, label="PJI1 \n(2) \n 1",  width=0.6]
+    PJI2 [ch=40, color="#808080", id=PJI2, label="PJI2 \n(2) \n 4",  width=0.6]
     PJI3 [ch=40, color="#808080", id=PJI3, label="PJI3 \n(2) \n 7",  width=0.6]
     TCC1 [ch=40, color="#808080", id=TCC1, label="TCC1 \n(2) \n 8",  width=0.6]
     TCC2 [ch=100, color="#808080", id=TCC2, label="TCC2 \n(5) \n 9",  width=1.5]
 
 
-    DLP [ch=60, color="#9F8170", id=DLP, label="DLP \n(3)",  width=0.9]
-    ELD1 [ch=100, color="#9F8170", id=ELD1, label="ELD1 \n(5)",  width=1.5]
-    ELD2 [ch=100, color="#9F8170", id=ELD2, label="ELD2 \n(5)",  width=1.5]
-    MIC [ch=100, color="#9F8170", id=MIC, label="MIC \n(5)",  width=1.5]
-    STE [ch=80, color="#9F8170", id=STE, label="STE \n(4)",  width=1.2]
-
+    ELD1 [ch=100, color="#9F8170", id=ELD1, label="ELD1 \n(5) \n 1",  width=1.5]
+    ELD2 [ch=100, color="#9F8170", id=ELD2, label="ELD2 \n(5) \n 2",  width=1.5]
+    MIC [ch=100, color="#9F8170", id=MIC, label="MIC \n(5) \n 3",  width=1.5]
+    STE [ch=80, color="#9F8170", id=STE, label="STE \n(4) \n 5",  width=1.2]
+    DLP [ch=60, color="#9F8170", id=DLP, label="DLP \n(3) \n 5" width=0.9]
 
     EMG [ch=60, color="#9678B6", id=EMG, label="EMG \n(3) \n 4",  width=0.9]
     MTG [ch=80, color="#9678B6", id=MTG, label="MTG \n(4) \n 5",  width=1.2]
@@ -305,21 +304,21 @@ digraph EngTelecom {
     CSF [ch=60, color="#9678B6", id=CSF, label="CSF \n(3) \n 7",  width=0.9]
     STC [ch=60, color="#9678B6", id=STC, label="STC \n(3) \n 8",  width=0.9]
     CRF [ch=60, color="#9678B6", id=CRF, label="CRF \n(3) \n 9",  width=0.9]
-    TLF [ch=80, color="#9678B6", id=TLF, label="TLF \n(4)",  width=1.2]
+    TLF [ch=80, color="#9678B6", id=TLF, label="TLF \n(4) \n 6",  width=1.2]
 
 
-    ADS [ch=40, color="#77DD77", id=ADS, label="ADS \n(2)",  width=0.6]
-    RED1 [ch=80, color="#77DD77", id=RED1, label="RED1 \n(4)",  width=1.2]
-    RED2 [ch=80, color="#77DD77", id=RED2, label="RED2 \n(4)",  width=1.2]
+    ADS [ch=40, color="#77DD77", id=ADS, label="ADS \n(2) \n 7",  width=0.6]
+    RED1 [ch=80, color="#77DD77", id=RED1, label="RED1 \n(4) \n 2",  width=1.2]
+    RED2 [ch=80, color="#77DD77", id=RED2, label="RED2 \n(4) \n 3",  width=1.2]
 
 
-    BCD [ch=60, color="#339966", id=BCD, label="BCD \n(3)",  width=0.9]
-    LOG [ch=40, color="#339966", id=LOG, label="LOG \n(2)",  width=0.6]
-    POO [ch=80, color="#339966", id=POO, label="POO \n(4)",  width=1.2]
-    PRG1 [ch=80, color="#339966", id=PRG1, label="PRG1 \n(4)",  width=1.2]
-    PRG2 [ch=80, color="#339966", id=PRG2, label="PRG2 \n(4)",  width=1.2]
-    PTC [ch=40, color="#339966", id=PTC, label="PTC \n(2)",  width=0.6]
-    SOP [ch=80, color="#339966", id=SOP, label="SOP \n(4)",  width=1.2]
-    STD [ch=60, color="#339966", id=STD, label="STD \n(3)",  width=0.9]
+    BCD [ch=60, color="#339966", id=BCD, label="BCD \n(3) \n 4",  width=0.9]
+    LOG [ch=40, color="#339966", id=LOG, label="LOG \n(2) \n 1",  width=0.6]
+    POO [ch=80, color="#339966", id=POO, label="POO \n(4) \n 3",  width=1.2]
+    PRG1 [ch=80, color="#339966", id=PRG1, label="PRG1 \n(4) \n 1",  width=1.2]
+    PRG2 [ch=80, color="#339966", id=PRG2, label="PRG2 \n(4) \n 2",  width=1.2]
+    PTC [ch=40, color="#339966", id=PTC, label="PTC \n(2) \n 6",  width=0.6]
+    SOP [ch=80, color="#339966", id=SOP, label="SOP \n(4) \n 4",  width=1.2]
+    STD [ch=60, color="#339966", id=STD, label="STD \n(3) \n 5",  width=0.9]
 
 }
