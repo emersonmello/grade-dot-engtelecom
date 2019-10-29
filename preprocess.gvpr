@@ -8,7 +8,11 @@ BEG_G {
     node_t no = fstnode($);
 
     while (no != NULL){
-        no.label = sprintf("%s\n(%d)", no.id, no.ch/20);
+
+        int creditos = no.ch/20;
+        if (creditos > 0){
+            no.label = sprintf("%s\n(%d)", no.id, creditos);
+        }
 
         if ((strcmp(no.id,"TCC1"))&&(strcmp(no.id,"TCC2"))&&(strcmp(no.id,"ETO")) ){
             tot_ch+=no.ch;
