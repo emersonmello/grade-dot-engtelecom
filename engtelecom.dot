@@ -245,7 +245,7 @@ digraph EngTelecom {
     FEN [ch=40, color="#FFA343", id=FEN]
     FSC1 [ch=80, color="#FFA343", id=FSC1]
     FSC2 [ch=80, color="#FFA343", id=FSC2]
-    FSC3 [ch=100, color="#FFA343", id=FSC3] # TODO verificar se terá redução de CH
+    FSC3 [ch=80, color="#FFA343", id=FSC3] 
     GAL [ch=60, color="#FFA343", id=GAL]
     MEC [ch=40, color="#FFA343", id=MEC]
     MPQ [ch=40, color="#FFA343", id=MPQ]
