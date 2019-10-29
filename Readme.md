@@ -8,6 +8,11 @@
 
 - Use o *shell script* [gera-pngs.sh](gera-pngs.sh) para gerar 2 arquivos PNG do grafo.
 
+- Instale o pacote graphviz
+  - ```shell
+    sudo apt install graphviz
+    ```
+- Gere as imagens da rede curricular    
   - ```shell
     bash gera-pngs.sh engtelecom.dot LOG-co-PRG1.dot
     ```
