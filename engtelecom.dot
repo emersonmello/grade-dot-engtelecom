@@ -10,23 +10,41 @@ digraph EngTelecom {
     edge [color="#000000", penwidth="2", fontname="helvetica Neue Ultra Light"]
 
     // Pré-requisitos
+    
+    // deixando as disciplinas sem pré-requisito no mesmo nível do grafo
+    // remover esse bloco quando forem colocadas nos subgraph das fases
+    { 
+      rank=same
+      // laranja
+      {} -> DES
+      {} -> ESC
+      {} -> PTG
+      {} -> QMC1
+      {} -> SUS
+      {} -> PCA
+      {} -> GAL
+
+      // cinza
+      {} -> PJI1
+
+      // marrrom
+      {} -> ELD1
+
+      // verde escuro
+      {} -> LOG
+
+    }
 
     // Eixo laranja
+
     {horas1980} -> ADM
-    {} -> DES
-    {} -> ESC
-    {} -> PTG
-    {} -> QMC1
-    {} -> SUS
+    
     {ADM} -> ECO
     {CAL1} -> EST
     {FSC2} -> FEN
     {CAL2 FSC1} -> MEC
     {EST} -> MPQ # TODO verificar se PJI2 e PTG devem ser pré-requisito
     {QMC1} -> QMC2
-
-    {} -> PCA
-    {} -> GAL
     {GAL} -> ALG
     {PCA} -> CAL1 #[constraint=false,color="#FF0000"]
     {CAL1} -> CAL2
@@ -55,7 +73,7 @@ digraph EngTelecom {
     {CAL4 SIS2} -> PSD  # recomendada: CAN
 
     // Eixo cinza
-    {} -> PJI1
+    
     {PJI1 RED2 MIC} -> PJI2
     {STD} -> PJI2 [color="#FF0000" constraint=false]
     {PJI2 ANT PSD COM1 ELA2} -> PJI3 # recomendada: DLP 
@@ -66,7 +84,7 @@ digraph EngTelecom {
 
     // Eixo marrom
     {SOP MIC} -> DLP
-    {} -> ELD1
+    
     {ELD1} -> ELD2 # recomendada: ELA1
     {ELD2 PRG2} -> MIC
     {POO} -> MIC [color="#FF0000" constraint=false]
@@ -88,9 +106,8 @@ digraph EngTelecom {
     {PTC PRE} -> ADS
 
     // Eixo verde escuro
-    {} -> LOG
-    {LOG} -> PRG1 [color="#FF0000" constraint=false]
-    // {} -> PRG1
+    
+    {LOG} -> PRG1 #[color="#FF0000" constraint=false]
     {PRG1} -> PRG2
     {PRG2} -> POO
     {PRG2 MIC} -> SOP
@@ -210,9 +227,9 @@ digraph EngTelecom {
 
     // propriedades dos nós
 
-    horas1980 [label="1980h", color="#5b6e8b", id="1980h"] # TODO rever isso para ADM
-    horasTCC [label="2716h",  color="#5b6e8b", id="2716h"] # TODO CEPE 70% da CH atual, 3.880
-    horasETO [label="2328h",  color="#5b6e8b", id="2328h"] # TODO CEPE 60% da CH atual, 3.880
+    horas1980 [label="1.980h", color="#8da3c3", id="1.980h"] # TODO rever isso para ADM
+    horasTCC [label="2.716h",  color="#8da3c3", id="2.716h"] # TODO CEPE 70% da CH atual, 3.880
+    horasETO [label="2.328h",  color="#8da3c3", id="2.328h"] # TODO CEPE 60% da CH atual, 3.880
 
     ADM [ch=40, color="#FFA343", id=ADM] # TODO pré-requisito 1980h
     ALG [ch=60, color="#FFA343", id=ALG]
