@@ -1,15 +1,11 @@
 digraph EngTelecom {
-    layout = dot  // circo, dot, fdp, neato, osage, sfdp, twopi
+    layout = dot
     label ="Engenharia de Telecomunicações"
     labelloc = t
-    // graph [nodesep=0.3, ranksep=1.3]#, splines=ortho]#, splines=lines] # ortho
-    // node [labelloc=c fontsize=10, style=filled, shape=box, style="rounded,filled"]
-    // edge [arrowsize=.5]
-   
     // bgcolor="#2e3e56"
 	  pad="0.5" /* add padding round the edge of the graph */
-    graph [nodesep=0.3, ranksep=1.3, fontname="helvetica Neue Ultra Light", fontcolor="#000000" fontsize=25]
-    node [shape="circle", width=".8", style="filled", labelloc=c, fontname="helvetica Neue Ultra Light bold"fixedsize=true]
+    graph [nodesep=0.3, ranksep=1.3, fontname="helvetica Neue Ultra Light", fontcolor="#000000", fontsize=25]
+    node [shape="circle", width=".8", style="filled", labelloc=c, fontname="helvetica Neue Ultra Light bold", fixedsize=true]
     // edge [color="#fcfcfc", penwidth="2", fontname="helvetica Neue Ultra Light"]
     edge [color="#000000", penwidth="2", fontname="helvetica Neue Ultra Light"]
 
@@ -41,18 +37,17 @@ digraph EngTelecom {
     {FSC1} -> FSC2
     {FSC1 CAL2} -> FSC3
 
-
     // Eixo amarelo
     {CAL1 ALG FSC3} -> CIE1
     {CIE1 CAL2} -> CIE2
-    {CIE2 SIS2} -> CIE3 # TODO verificar
-    {CIE2 LCI QMC1} -> ELA1 # TODO verificar
+    {CIE2 SIS2} -> CIE3 
+    {CIE2 LCI QMC1} -> ELA1
     {CAL2 CIE2 ELA1 SIS2} -> ELA2
     {ELA2 CIE3} -> ELA3
     {CIE1 SIS1} -> LCI
 
     // Eixo azul
-    {PRE} -> COM1 # recomendada: sis2
+    {PRE} -> COM1 # recomendada: SIS2
     {COM1} -> COM2 # recomendada: PSD
     {EST SIS1} -> PRE # recomendada: PRG1, CAL4
     {CAL2 ALG CAL4} -> SIS1
@@ -61,33 +56,31 @@ digraph EngTelecom {
 
     // Eixo cinza
     {} -> PJI1
-    {PJI1 RED2 MIC} -> PJI2 # TODO colocar STD como pré-requisito
+    {PJI1 RED2 MIC} -> PJI2
     {STD} -> PJI2 [color="#FF0000" constraint=false]
-    {PJI2 ANT PSD COM1} -> PJI3 # recomendada DLP # TODO Colocamos ELA2 como coreq
+    {PJI2 ANT PSD COM1 ELA2} -> PJI3 # recomendada: DLP 
     {STE} -> PJI3 [color="#FF0000" constraint=false]
-    {ELA2}-> PJI3 [color="#FF0000" constraint=false]
-    {MPQ PJI3} -> TCC1 # TODO colocar CH como pré-requisito - tirei PTG
+    {MPQ PJI3 horasTCC} -> TCC1 # TODO colocar CH como pré-requisito - tirei PTG
     {TCC1} -> TCC2
+    {horasETO} -> ETO
 
     // Eixo marrom
     {SOP MIC} -> DLP
     {} -> ELD1
-    {ELD1} -> ELD2 # ELA1 como recomendada
+    {ELD1} -> ELD2 # recomendada: ELA1
     {ELD2 PRG2} -> MIC
     {POO} -> MIC [color="#FF0000" constraint=false]
-    {MIC SOP POO} -> STE
+    {MIC SOP POO} -> STE # recomendada: DLP
 
     // Eixo roxo
-    {MTG} -> ANT
-    {COM1} -> ANT [color="#FF0000" constraint=false]
-    {COM1 ANT ELA3} -> CRF # recomendada CSF
+    {MTG} -> ANT # recomendada: COM1
+    {COM1 ANT ELA3} -> CRF # recomendada: CSF
     {STC} -> CRF [color="#FF0000" constraint=false]
-    {ANT} -> CSF # recomendada: COM1
+    {ANT COM1} -> CSF
     {FSC3 CAL3} -> EMG
     {EMG} -> MTG # recomendada: CAL4
     {CSF} -> STC
-    {CRF} -> STC [color="#FF0000" constraint=false]
-    {MTG SIS1} -> TLF
+    {SIS1 MTG} -> TLF
 
     // Eixo verde claro
     {ELD1 PRG1} -> RED1
@@ -96,139 +89,130 @@ digraph EngTelecom {
 
     // Eixo verde escuro
     {} -> LOG
-    // {LOG} -> PRG1 [color="#FF0000" constraint=false]
-    {} -> PRG1
+    {LOG} -> PRG1 [color="#FF0000" constraint=false]
+    // {} -> PRG1
     {PRG1} -> PRG2
     {PRG2} -> POO
     {PRG2 MIC} -> SOP
     {POO RED1 SOP} -> STD
     {POO} -> BCD
-    {STD} -> PTC # RED2 como recomendada
-
-
+    {STD} -> PTC # recomendada: RED2
 
     // Fases
 
-    subgraph cluster_fase1 {
-      label = "Fase 1"
-      // style = filled
-      style="rounded"
-      bgcolor= "#e6e6e6" #"#5b6e8b"
-      color = lightgrey
+    // subgraph cluster_fase1 {
+    //   label = "Fase 1"
+    //   style="rounded"
+    //   bgcolor= "#e6e6e6" #"#5b6e8b"
+    //   color = lightgrey
 
-      LOG PCA PJI1 GAL PTG DES PRG1 QMC1
-    }
+    //   LOG PCA PJI1 GAL PTG DES PRG1 QMC1
+    // }
 
-    subgraph cluster_fase2 {
-      label = "Fase 2"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style = filled
-      color = lightgrey
+    // subgraph cluster_fase2 {
+    //   label = "Fase 2"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color = lightgrey
 
-      CAL1 FSC1 ALG ELD1 PRG2 QMC2
-    }
+    //   CAL1 FSC1 ALG ELD1 PRG2 QMC2
+    // }
 
-    subgraph clusterFase3 {
-      label = "Fase 3"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style = filled
-      color = lightgrey
+    // subgraph clusterFase3 {
+    //   label = "Fase 3"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color = lightgrey
 
-      CAL2 FSC2 ELD2 POO RED1 ESC
-    }
+    //   CAL2 FSC2 ELD2 POO RED1 ESC
+    // }
 
-    subgraph clusterFase4 {
-      label = "Fase 4"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style=filled
-      color=lightgrey
+    // subgraph clusterFase4 {
+    //   label = "Fase 4"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color=lightgrey
 
-      RED2 MIC CAL3 FSC3 FEN CAN SUS 
+    //   RED2 MIC CAL3 FSC3 FEN CAN SUS 
     
-    }
+    // }
 
-    subgraph cluster_fase5 {
-      label = "Fase 5"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style=filled
-      color=lightgrey
+    // subgraph cluster_fase5 {
+    //   label = "Fase 5"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color=lightgrey
 
-      CAL4 EMG CIE1 BCD SOP EST MEC
-    }
-
-
-    subgraph cluster_fase6 {
-      label = "Fase 6"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style=filled
-      color=lightgrey
-
-      SIS1 CIE2 STD PJI2 MTG STE DLP
-    }
-
-    subgraph cluster_fase7 {
-      label = "Fase 7"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style=filled
-      color=lightgrey
-
-     LCI TLF PRE SIS2 PTC MPQ ADM
-    }
-
-    subgraph cluster_fase8 {
-      label = "Fase 8"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style=filled
-      color=lightgrey
-
-      ELA1 CIE3 ADS PSD COM1 ANT ECO
-    }
-
-    subgraph cluster_fase9 {
-      label = "Fase 9"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style=filled
-      color=lightgrey
-
-      COM2 ELA2 CSF PJI3 
-    }
-
-    subgraph cluster_fase10 {
-      label = "Fase 10"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style=filled
-      color=lightgrey
-
-      STC ELA3 TCC1
-    }
-
-    subgraph cluster_fase11 {
-      label = "Fase 11"
-      style="rounded"
-      bgcolor="#e6e6e6"
-      // style=filled
-      color=lightgrey
-
-      TCC2 ETO CRF
-    }
+    //   CAL4 EMG CIE1 BCD SOP EST MEC
+    // }
 
 
-      // expressão regular
-      // (\w{3,4}) (\[ch=\d{2,3}) - find
-      // $1 $2, color="#FFA343, id=$1 - replace
+    // subgraph cluster_fase6 {
+    //   label = "Fase 6"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color=lightgrey
+
+    //   SIS1 CIE2 STD PJI2 MTG STE DLP
+    // }
+
+    // subgraph cluster_fase7 {
+    //   label = "Fase 7"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color=lightgrey
+
+    //  LCI TLF PRE SIS2 PTC MPQ ADM
+    // }
+
+    // subgraph cluster_fase8 {
+    //   label = "Fase 8"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color=lightgrey
+
+    //   ELA1 CIE3 ADS PSD COM1 ANT ECO
+    // }
+
+    // subgraph cluster_fase9 {
+    //   label = "Fase 9"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color=lightgrey
+
+    //   COM2 ELA2 CSF PJI3 
+    // }
+
+    // subgraph cluster_fase10 {
+    //   label = "Fase 10"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color=lightgrey
+
+    //   STC ELA3 TCC1
+    // }
+
+    // subgraph cluster_fase11 {
+    //   label = "Fase 11"
+    //   style="rounded"
+    //   bgcolor="#e6e6e6"
+    //   color=lightgrey
+
+    //   TCC2 ETO CRF
+    // }
+
+
+    // A expressão regular abaixo serve para substituir as propriedades
+    // dos nós, por exemplo, para adicionar a propriedade color
+
+    // find: (\w{3,4}) (\[ch=\d{2,3})
+    // replace: $1 $2, color="#FFA343, id=$1
 
     // propriedades dos nós
 
-    horas1980 [label="1980h", color="#5b6e8b", id="1980h"]
+    horas1980 [label="1980h", color="#5b6e8b", id="1980h"] # TODO rever isso para ADM
+    horasTCC [label="2716h",  color="#5b6e8b", id="2716h"] # TODO CEPE 70% da CH atual, 3.880
+    horasETO [label="2328h",  color="#5b6e8b", id="2328h"] # TODO CEPE 60% da CH atual, 3.880
 
     ADM [ch=40, color="#FFA343", id=ADM] # TODO pré-requisito 1980h
     ALG [ch=60, color="#FFA343", id=ALG]
