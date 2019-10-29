@@ -13,15 +13,15 @@ digraph EngTelecom {
     
     // deixando as disciplinas sem pré-requisito no mesmo nível do grafo
     // remover esse bloco quando forem colocadas nos subgraph das fases
-    { 
-      rank=same
+    // { 
+    //   rank=same
       // laranja
       {} -> DES
       {} -> ESC
       {} -> PTG
       {} -> QMC1
       {} -> SUS
-      {} -> PCA
+      {} -> CAL1
       {} -> GAL
 
       // cinza
@@ -33,7 +33,7 @@ digraph EngTelecom {
       // verde escuro
       {} -> LOG
 
-    }
+    // }
 
     // Eixo laranja
 
@@ -46,12 +46,12 @@ digraph EngTelecom {
     {EST} -> MPQ # TODO verificar se PJI2 e PTG devem ser pré-requisito
     {QMC1} -> QMC2
     {GAL} -> ALG
-    {PCA} -> CAL1 #[constraint=false,color="#FF0000"]
+    // {PCA} -> CAL1 #[constraint=false,color="#FF0000"]
     {CAL1} -> CAL2
     {GAL CAL2} -> CAL3
     {CAL2} -> CAL4
     {ALG CAL2} -> CAN
-    {PCA} -> FSC1
+    // {CAL1} -> FSC1
     {FSC1} -> FSC2
     {FSC1 CAL2} -> FSC3
 
@@ -117,97 +117,104 @@ digraph EngTelecom {
 
     // Fases
 
-    // subgraph cluster_fase1 {
-    //   label = "Fase 1"
-    //   style="rounded"
-    //   bgcolor= "#e6e6e6" #"#5b6e8b"
-    //   color = lightgrey
+    subgraph cluster_fase1 {
+      label = "Fase 1"
+      style="rounded"
+      bgcolor= "#e6e6e6" #"#5b6e8b"
+      color = lightgrey
 
-    //   LOG PCA PJI1 GAL PTG DES PRG1 QMC1
-    // }
+      CAL1 FSC1 PJI1 GAL LOG DES PTG
+    }
 
-    // subgraph cluster_fase2 {
-    //   label = "Fase 2"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color = lightgrey
+    subgraph cluster_fase2 {
+      label = "Fase 2"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color = lightgrey
 
-    //   CAL1 FSC1 ALG ELD1 PRG2 QMC2
-    // }
+      CAL2 ALG PRG1 FSC2 ESC ELD1
+    }
 
-    // subgraph clusterFase3 {
-    //   label = "Fase 3"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color = lightgrey
+    subgraph clusterFase3 {
+      label = "Fase 3"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color = lightgrey
 
-    //   CAL2 FSC2 ELD2 POO RED1 ESC
-    // }
+      ELD2 PRG2 CAL4 FSC3 RED1 CAL3 FEN
 
-    // subgraph clusterFase4 {
-    //   label = "Fase 4"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color=lightgrey
+    }
 
-    //   RED2 MIC CAL3 FSC3 FEN CAN SUS 
+    subgraph clusterFase4 {
+      label = "Fase 4"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      POO EMG MIC SIS1 CIE1 QMC1 MEC
+
     
-    // }
+    }
 
-    // subgraph cluster_fase5 {
-    //   label = "Fase 5"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color=lightgrey
+    subgraph cluster_fase5 {
+      label = "Fase 5"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
 
-    //   CAL4 EMG CIE1 BCD SOP EST MEC
-    // }
+      CIE2 LCI SIS2 MTG EST SOP RED2 CAN
+
+    }
 
 
-    // subgraph cluster_fase6 {
-    //   label = "Fase 6"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color=lightgrey
+    subgraph cluster_fase6 {
+      label = "Fase 6"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
 
-    //   SIS1 CIE2 STD PJI2 MTG STE DLP
-    // }
+      PJI2 STD STE PRE CIE3 ELA1 ANT
 
-    // subgraph cluster_fase7 {
-    //   label = "Fase 7"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color=lightgrey
+    }
 
-    //  LCI TLF PRE SIS2 PTC MPQ ADM
-    // }
+    subgraph cluster_fase7 {
+      label = "Fase 7"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
 
-    // subgraph cluster_fase8 {
-    //   label = "Fase 8"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color=lightgrey
+      PSD COM1 ELA2 DLP QMC2 ADM TLF
 
-    //   ELA1 CIE3 ADS PSD COM1 ANT ECO
-    // }
+    }
 
-    // subgraph cluster_fase9 {
-    //   label = "Fase 9"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color=lightgrey
+    subgraph cluster_fase8 {
+      label = "Fase 8"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
 
-    //   COM2 ELA2 CSF PJI3 
-    // }
+      PTC BCD MPQ ELA3 CSF COM2 PJI3
 
-    // subgraph cluster_fase10 {
-    //   label = "Fase 10"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color=lightgrey
+    }
 
-    //   STC ELA3 TCC1
-    // }
+    subgraph cluster_fase9 {
+      label = "Fase 9"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      SUS TCC1 ADS STC CRF ECO
+
+    }
+
+    subgraph cluster_fase10 {
+      label = "Fase 10"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      TCC2 ETO
+    }
 
     // subgraph cluster_fase11 {
     //   label = "Fase 11"
@@ -233,7 +240,7 @@ digraph EngTelecom {
 
     ADM [ch=40, color="#FFA343", id=ADM] # TODO pré-requisito 1980h
     ALG [ch=60, color="#FFA343", id=ALG]
-    CAL1 [ch=80, color="#FFA343", id=CAL1]
+    CAL1 [ch=120, color="#FFA343", id=CAL1]
     CAL2 [ch=80, color="#FFA343", id=CAL2]
     CAL3 [ch=80, color="#FFA343", id=CAL3]
     CAL4 [ch=40, color="#FFA343", id=CAL4]
@@ -249,7 +256,7 @@ digraph EngTelecom {
     GAL [ch=60, color="#FFA343", id=GAL]
     MEC [ch=40, color="#FFA343", id=MEC]
     MPQ [ch=40, color="#FFA343", id=MPQ]
-    PCA [ch=40, color="#FFA343", id=PCA]
+    // PCA [ch=40, color="#FFA343", id=PCA]
     PTG [ch=40, color="#FFA343", id=PTG] # TODO pré-requisito 1980h
     QMC1 [ch=60, color="#FFA343", id=QMC1]
     QMC2 [ch=40, color="#FFA343", id=QMC2]
