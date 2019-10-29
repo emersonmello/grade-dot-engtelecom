@@ -24,4 +24,4 @@ png2=`echo $2 |cut -d "." -f1`
 
 dot $1 -Tpng > $png1.png
 dot $2 -Tpng > $png2.png
-
+dot $2 -Tsvg > pagina-html/comissao.svg

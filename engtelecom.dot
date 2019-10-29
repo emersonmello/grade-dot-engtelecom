@@ -141,7 +141,7 @@ digraph EngTelecom {
       bgcolor="#e6e6e6"
       color = lightgrey
 
-      ELD2 PRG2 CAL4 FSC3 RED1 CAL3 FEN
+      ELD2 PRG2 CAL4 FSC3 RED1 FEN QMC1
 
     }
 
@@ -151,7 +151,7 @@ digraph EngTelecom {
       bgcolor="#e6e6e6"
       color=lightgrey
 
-      POO EMG MIC SIS1 CIE1 QMC1 MEC
+      POO CAL3 MIC SIS1 CIE1  MEC CAN
 
     
     }
@@ -162,7 +162,7 @@ digraph EngTelecom {
       bgcolor="#e6e6e6"
       color=lightgrey
 
-      CIE2 LCI SIS2 MTG EST SOP RED2 CAN
+      CIE2 LCI SIS2 EMG EST SOP RED2 
 
     }
 
@@ -173,7 +173,7 @@ digraph EngTelecom {
       bgcolor="#e6e6e6"
       color=lightgrey
 
-      PJI2 STD STE PRE CIE3 ELA1 ANT
+      PJI2 STD STE PRE CIE3 ELA1 MTG
 
     }
 
@@ -183,7 +183,7 @@ digraph EngTelecom {
       bgcolor="#e6e6e6"
       color=lightgrey
 
-      PSD COM1 ELA2 DLP QMC2 ADM TLF
+      PSD COM1 ELA2 DLP QMC2 ADM  ANT
 
     }
 
@@ -193,7 +193,7 @@ digraph EngTelecom {
       bgcolor="#e6e6e6"
       color=lightgrey
 
-      PTC BCD MPQ ELA3 CSF COM2 PJI3
+      PTC BCD MPQ ELA3 CSF COM2 PJI3 TLF
 
     }
 
