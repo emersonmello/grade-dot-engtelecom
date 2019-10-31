@@ -224,9 +224,9 @@ digraph EngTelecom {
 
     // propriedades dos nós
 
-    horas1980 [label="1.980h", color="#8da3c3", id="1.980h"] # TODO rever isso para ADM
-    horasTCC [label="2.716h",  color="#8da3c3", id="2.716h"] # TODO CEPE 70% da CH atual, 3.880
-    horasETO [label="2.328h",  color="#8da3c3", id="2.328h"] # TODO CEPE 60% da CH atual, 3.880
+    horas1980 [label="1.980h", color="#8da3c3", id="horas1980"] # TODO rever isso para ADM
+    horasTCC [label="0000h",  color="#8da3c3", id="horasTCC"] # 70% da CH atual, será preenchido pelo preprocess.gvpr
+    horasETO [label="0000h",  color="#8da3c3", id="horasETO"] # 60% da CH atual, será preenchido pelo preprocess.gvpr
 
     ADM [ch=40, color="#FFA343", id=ADM] # TODO pré-requisito 1980h
     ALG [ch=60, color="#FFA343", id=ALG]

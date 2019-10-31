@@ -22,6 +22,4 @@ if [ "$1" = "$2" ]; then
     exit 1
 fi 
 
-arquivoSaida=`echo $1.$$-tmp.dot`
-
-gvpr "$1" -c -f preprocess.gvpr -o "$arquivoSaida" && dot "$arquivoSaida" -Tsvg > "$2" && rm "$arquivoSaida"
+gvpr "$1" -c -f preprocess.gvpr | dot -Tsvg > "$2"
