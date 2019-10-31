@@ -1,7 +1,11 @@
 // preprocess.gvpr
-// $ gvpr ppc-2020.dot -c -f preprocess.gvpr -o ppc-2020-ch.dot
+// $ gvpr engtelecom.dot -c -f preprocess.gvpr -o saida-ch.dot
 
-BEGIN { int tot_ch = 0;}
+BEGIN { 
+    int tot_ch = 0;  // carga horaria total do curso
+    double tcc_ch = 0; // TCC1 tem como pre-requisito 70% da CH total
+    double eto_ch = 0; // ETO tem como pre-requisito 60% da CH total
+}
 
 BEG_G {
 
@@ -10,23 +14,39 @@ BEG_G {
     while (no != NULL){
 
         int creditos = no.ch/20;
+
+       // Só alterar o label de nós que possuem créditos > 0 
         if (creditos > 0){
             no.label = sprintf("%s\n(%d)", no.id, creditos);
         }
 
+        // CH total do curso não comtabilizará TCC1, TCC2 e ETO
         if ((strcmp(no.id,"TCC1"))&&(strcmp(no.id,"TCC2"))&&(strcmp(no.id,"ETO")) ){
             tot_ch+=no.ch;
         }
 
         no = nxtnode(no);
     }
+    
+    //CEPE 70% da CH atual
+    tcc_ch = tot_ch * 0.7;
+
+    //CEPE 60% da CH atual
+    eto_ch = tot_ch * 0.6;
 
     graph_t subgraph = fstsubg($);
+
     while (subgraph != NULL) {
         int ch_eixo = 0;
         node_t n = fstnode(subgraph);
         while (n != NULL) {
             ch_eixo += n.ch;
+            if (strcmp(n.id,"horasTCC") == 0){
+                n.label = sprintf("%dh", tcc_ch);
+            }
+            if (strcmp(n.id,"horasETO") == 0){
+                n.label = sprintf("%dh", eto_ch);
+            }
 
             n = nxtnode_sg(subgraph, n);
         }
@@ -35,4 +55,8 @@ BEG_G {
     }
     label = sprintf("%s\n Carga horária total: %d (não inclui ETO, TCC1 e TCC2)",label,tot_ch);
 }
-//END { printf ("Carga horária total: %d \n", tot_ch) }
+//END { 
+//    printf ("Carga horária total: %d \n", tot_ch);
+//    printf ("Carga horária TCC: %d \n", tcc_ch);
+//    printf ("Carga horária ETO: %d \n", eto_ch);
+// }
