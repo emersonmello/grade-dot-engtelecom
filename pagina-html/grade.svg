@@ -62,7 +62,7 @@
 <text text-anchor="middle" x="765.5" y="-91" font-family="helvetica Neue Ultra Light" font-size="25.00" fill="#000000">Fase 10 [260 h] &#45; 13</text>
 </g>
 <!-- horas1980 -->
-<g id="1.980h" class="node">
+<g id="horas1980" class="node">
 <title>horas1980</title>
 <ellipse fill="#8da3c3" stroke="#8da3c3" cx="119" cy="-653" rx="29" ry="29"/>
 <text text-anchor="middle" x="119" y="-648.8" font-family="helvetica Neue Ultra Light bold" font-size="14.00" fill="#000000">1.980h</text>
@@ -818,10 +818,10 @@
 <polygon fill="#000000" stroke="#000000" stroke-width="2" points="673.7363,-235.1002 674.7984,-224.5588 667.3944,-232.1371 673.7363,-235.1002"/>
 </g>
 <!-- horasTCC -->
-<g id="2.716h" class="node">
+<g id="horasTCC" class="node">
 <title>horasTCC</title>
 <ellipse fill="#8da3c3" stroke="#8da3c3" cx="1004" cy="-349" rx="29" ry="29"/>
-<text text-anchor="middle" x="1004" y="-344.8" font-family="helvetica Neue Ultra Light bold" font-size="14.00" fill="#000000">2.716h</text>
+<text text-anchor="middle" x="1004" y="-344.8" font-family="helvetica Neue Ultra Light bold" font-size="14.00" fill="#000000">2716h</text>
 </g>
 <!-- horasTCC&#45;&gt;TCC1 -->
 <g id="edge75" class="edge">
@@ -843,10 +843,10 @@
 <polygon fill="#000000" stroke="#000000" stroke-width="2" points="687.5001,-84.2171 684,-74.2172 680.5001,-84.2172 687.5001,-84.2171"/>
 </g>
 <!-- horasETO -->
-<g id="2.328h" class="node">
+<g id="horasETO" class="node">
 <title>horasETO</title>
 <ellipse fill="#8da3c3" stroke="#8da3c3" cx="846" cy="-197" rx="29" ry="29"/>
-<text text-anchor="middle" x="846" y="-192.8" font-family="helvetica Neue Ultra Light bold" font-size="14.00" fill="#000000">2.328h</text>
+<text text-anchor="middle" x="846" y="-192.8" font-family="helvetica Neue Ultra Light bold" font-size="14.00" fill="#000000">2328h</text>
 </g>
 <!-- ETO -->
 <g id="ETO" class="node">

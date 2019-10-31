@@ -1,0 +1,302 @@
+digraph EngTelecom {
+    layout = dot
+    label ="PPC 2015 Engenharia de Telecomunicações"
+    labelloc = t
+    // bgcolor="#2e3e56"
+	  pad="0.5" /* add padding round the edge of the graph */
+    graph [nodesep=0.3, ranksep=1.3, fontname="helvetica Neue Ultra Light", fontcolor="#000000", fontsize=25]
+    node [shape="circle", width=".8", style="filled", labelloc=c, fontname="helvetica Neue Ultra Light bold", fixedsize=true]
+    // edge [color="#fcfcfc", penwidth="2", fontname="helvetica Neue Ultra Light"]
+    edge [color="#000000", penwidth="2", fontname="helvetica Neue Ultra Light"]
+
+    // Pré-requisitos
+    
+    // // deixando as disciplinas sem pré-requisito no mesmo nível do grafo
+    // // remover esse bloco quando forem colocadas nos subgraph das fases
+    // // { 
+    // //   rank=same
+    //   // laranja
+    //   {} -> DES
+    //   {} -> ESC
+    //   {} -> PTG
+    //   {} -> QMC1
+    //   {} -> SUS
+    //   {} -> CAL1
+    //   {} -> GAL
+
+    //   // cinza
+    //   {} -> PJI1
+
+    //   // marrrom
+    //   {} -> ELD1
+
+    //   // verde escuro
+    //   {} -> LOG
+
+    // // }
+
+    // // Eixo laranja
+
+
+
+    // fase 2
+    {CAL1} -> CAL2
+    {CAL1 FSC1} -> FSC2
+    {CAL1 ELI} -> CIE1
+    {GAL} -> ALG
+    {LOG} -> PRG1
+    
+    // fase 3
+    {CAL2 GAL} -> CAL3
+    {CIE1 CAL2} -> CIE2
+    {CIE1 CAL1} -> ELA1
+    {LOG} -> CIL
+    {PRG1} -> PRG2
+
+    // fase 4
+    {CAL2} -> CAL4
+    {CIL} -> RED1
+    {ELA1 CAL2} -> ELA2
+    {CIL} -> MIC
+    {PRG2} -> POO
+
+    // fase 5
+    {CAL1} -> EST
+    {RED1} -> RED2
+    {FSC1 CAL3} -> FSC3
+    {PRG2 MIC} -> SOP
+    {CAL4 ALG CIE2} -> SIS1
+
+    // fase 6
+    {EST CAL4} -> PRE
+    {FSC3} -> ANT
+    {RED1 POO SOP} -> STD
+    {CIL} -> DLP1
+    {SIS1} -> SIS2
+    {PJI1 RED2 MIC} -> PJI2
+    {STD} -> PJI2 [constraint=false,color="#FF0000"]
+
+    // fase 7
+    {RED1 SIS2} -> RTX
+    {FSC3 SIS2} -> MTG
+    {DLP1 MIC} -> DLP2
+    {SIS2 DLP1} -> PSD
+    {SIS2 PRE} -> COM1
+
+    // fase 8
+    {ANT PRE} -> CSF
+    {POO} -> BCD
+    {SOP} -> STE
+    {PRG2 RED2} -> PTC
+    {COM1} -> COM2
+    {PJI2 PSD COM1} -> PJI3
+    {STE DLP2} -> PJI3 [constraint=false,color="#FF0000"]
+
+    // fase 9
+    {RED2} -> SMU
+    {PTC PRE} -> ADS
+    {COM1 RTX} -> STC
+    {COM1 DLP1 ANT} -> CRF
+    {horasTCC} -> TCC1
+
+    // fase 10
+    {horasETO} -> ETO
+    {TCC1 PJI3} -> TCC2
+
+    // ADM e PTG
+    {horas1980} -> ADM
+    {horas1980} -> PTG
+
+
+    // Fases
+
+    subgraph cluster_fase1 {
+      label = "Fase 1"
+      style="rounded"
+      bgcolor= "#e6e6e6" #"#5b6e8b"
+      color = lightgrey
+
+      DES CAL1 FSC1 GAL LOG PJI1 ELI
+    }
+
+    subgraph cluster_fase2 {
+      label = "Fase 2"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color = lightgrey
+
+      QMC1 CAL2 FSC2 CIE1 ALG PRG1
+
+    }
+
+    subgraph clusterFase3 {
+      label = "Fase 3"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color = lightgrey
+
+      QMC2 CAL3 CIE2 ELA1 CIL PRG2
+
+    }
+
+    subgraph clusterFase4 {
+      label = "Fase 4"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      MEC CAL4 RED1 ELA2 MIC POO 
+    
+    }
+
+    subgraph cluster_fase5 {
+      label = "Fase 5"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      MPQ EST RED2 FSC3 SOP SIS1
+
+    }
+
+
+    subgraph cluster_fase6 {
+      label = "Fase 6"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      FEN PRE ANT STD DLP1 SIS2 PJI2
+
+
+    }
+
+    subgraph cluster_fase7 {
+      label = "Fase 7"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      PTG RTX MTG DLP2 PSD COM1 
+
+
+    }
+
+    subgraph cluster_fase8 {
+      label = "Fase 8"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      ADM CSF PTC BCD STE COM2 PJI3
+
+    }
+
+    subgraph cluster_fase9 {
+      label = "Fase 9"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      ECO SUS SMU ADS STC CRF TCC1
+
+    }
+
+    subgraph cluster_fase10 {
+      label = "Fase 10"
+      style="rounded"
+      bgcolor="#e6e6e6"
+      color=lightgrey
+
+      TCC2 ETO
+    }
+
+    // A expressão regular abaixo serve para substituir as propriedades
+    // dos nós, por exemplo, para adicionar a propriedade color
+
+    // find: (\w{3,4}) (\[ch=\d{2,3})
+    // replace: $1 $2, color="#FFA343, id=$1
+
+    // propriedades dos nós
+
+    horas1980 [label="1.980h", color="#8da3c3", id="horas1980"] # TODO rever isso para ADM
+    horasTCC [label="0000h",  color="#8da3c3", id="horasTCC"] # 70% da CH atual, será preenchido pelo preprocess.gvpr
+    horasETO [label="0000h",  color="#8da3c3", id="horasETO"] # 60% da CH atual, será preenchido pelo preprocess.gvpr
+
+    ADM [ch=40, color="#FFA343", id=ADM] 
+    ALG [ch=60, color="#FFA343", id=ALG]
+    CAL1 [ch=80, color="#FFA343", id=CAL1]
+    CAL2 [ch=80, color="#FFA343", id=CAL2]
+    CAL3 [ch=80, color="#FFA343", id=CAL3]
+    CAL4 [ch=80, color="#FFA343", id=CAL4]
+    DES [ch=40, color="#FFA343", id=DES]
+    ECO [ch=40, color="#FFA343", id=ECO]
+    EST [ch=60, color="#FFA343", id=EST]
+    FEN [ch=40, color="#FFA343", id=FEN]
+    FSC1 [ch=80, color="#FFA343", id=FSC1]
+    FSC2 [ch=80, color="#FFA343", id=FSC2]
+    FSC3 [ch=100, color="#FFA343", id=FSC3] 
+    GAL [ch=60, color="#FFA343", id=GAL]
+    MEC [ch=40, color="#FFA343", id=MEC]
+    MPQ [ch=40, color="#FFA343", id=MPQ]
+    PTG [ch=40, color="#FFA343", id=PTG] 
+    QMC1 [ch=60, color="#FFA343", id=QMC1]
+    QMC2 [ch=40, color="#FFA343", id=QMC2]
+    SUS [ch=40, color="#FFA343", id=SUS]
+
+
+
+    CIE1 [ch=80, color="#FFD700", id=CIE1]
+    CIE2 [ch=80, color="#FFD700", id=CIE2]
+    ELA1 [ch=80, color="#FFD700", id=ELA1]
+    ELA2 [ch=80, color="#FFD700", id=ELA2]
+    ELI [ch=80, color="#FFD700", id=ELI]
+
+
+    COM1 [ch=100, color="#007FFF", id=COM1]
+    COM2 [ch=80, color="#007FFF", id=COM2]
+    PRE [ch=60, color="#007FFF", id=PRE]
+    PSD [ch=80, color="#007FFF", id=PSD]
+    SIS1 [ch=80, color="#007FFF", id=SIS1]
+    SIS2 [ch=60, color="#007FFF", id=SIS2]
+
+
+    ETO [ch=400, color="#808080", id=ETO]
+    PJI1 [ch=60, color="#808080", id=PJI1]
+    PJI2 [ch=40, color="#808080", id=PJI2]
+    PJI3 [ch=40, color="#808080", id=PJI3]
+    TCC1 [ch=40, color="#808080", id=TCC1]
+    TCC2 [ch=120, color="#808080", id=TCC2]
+
+
+    MIC [ch=80, color="#9F8170", id=MIC]
+    STE [ch=80, color="#9F8170", id=STE]
+    DLP1 [ch=100, color="#9F8170", id=DLP1]
+    DLP2 [ch=60, color="#9F8170", id=DLP2]
+    CIL [ch=80, color="#9F8170", id=CIL]
+
+
+    ANT [ch=80, color="#9678B6", id=ANT]
+    CRF [ch=80, color="#9678B6", id=CRF]
+    CSF [ch=80, color="#9678B6", id=CSF]
+    MTG [ch=80, color="#9678B6", id=MTG]
+    STC [ch=80, color="#9678B6", id=STC]
+    RTX [ch=80, color="#9678B6", id=RTX]
+
+
+    ADS [ch=60, color="#77DD77", id=ADS]
+    SMU [ch=60, color="#77DD77", id=SMU]
+    RED1 [ch=80, color="#77DD77", id=RED1]
+    RED2 [ch=80, color="#77DD77", id=RED2]
+
+
+    BCD [ch=60, color="#339966", id=BCD]
+    LOG [ch=40, color="#339966", id=LOG]
+    POO [ch=80, color="#339966", id=POO]
+    PRG1 [ch=80, color="#339966", id=PRG1]
+    PRG2 [ch=80, color="#339966", id=PRG2]
+    PTC [ch=60, color="#339966", id=PTC]
+    SOP [ch=80, color="#339966", id=SOP]
+    STD [ch=60, color="#339966", id=STD]
+
+}
