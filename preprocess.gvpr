@@ -5,11 +5,14 @@ BEGIN {
     int tot_ch = 0;  // carga horaria total do curso
     double tcc_ch = 0; // TCC1 tem como pre-requisito 70% da CH total
     double eto_ch = 0; // ETO tem como pre-requisito 60% da CH total
+    int tot_n = 0; int tot_e = 0;
 }
 
 BEG_G {
 
     node_t no = fstnode($);
+    tot_n = nNodes($G);
+    tot_e = nEdges($G);
 
     while (no != NULL){
 
@@ -55,8 +58,8 @@ BEG_G {
     }
     label = sprintf("%s\n Carga horária total: %d (não inclui ETO, TCC1 e TCC2)",label,tot_ch);
 }
-//END { 
-//    printf ("Carga horária total: %d \n", tot_ch);
-//    printf ("Carga horária TCC: %d \n", tcc_ch);
-//    printf ("Carga horária ETO: %d \n", eto_ch);
-// }
+END { 
+    printf ("//Carga horária total: %d \n", tot_ch);
+    printf ("//Total de nós: %d \n", tot_n);
+    printf ("//Total de arestas: %d \n", tot_e);
+}
