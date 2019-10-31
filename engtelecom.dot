@@ -216,16 +216,6 @@ digraph EngTelecom {
       TCC2 ETO
     }
 
-    // subgraph cluster_fase11 {
-    //   label = "Fase 11"
-    //   style="rounded"
-    //   bgcolor="#e6e6e6"
-    //   color=lightgrey
-
-    //   TCC2 ETO CRF
-    // }
-
-
     // A expressão regular abaixo serve para substituir as propriedades
     // dos nós, por exemplo, para adicionar a propriedade color
 
@@ -256,7 +246,6 @@ digraph EngTelecom {
     GAL [ch=60, color="#FFA343", id=GAL]
     MEC [ch=40, color="#FFA343", id=MEC]
     MPQ [ch=40, color="#FFA343", id=MPQ]
-    // PCA [ch=40, color="#FFA343", id=PCA]
     PTG [ch=40, color="#FFA343", id=PTG] # TODO pré-requisito 1980h
     QMC1 [ch=60, color="#FFA343", id=QMC1]
     QMC2 [ch=40, color="#FFA343", id=QMC2]
