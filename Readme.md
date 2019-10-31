@@ -1,19 +1,32 @@
 # Grade da Engenharia de Telecomunicações
 
-
-
-- O arquivo [engtelecom.dot](engtelecom.dot) contém o fonte da grade
-
-- Use o *shell script* [gera-ch.sh](gera-ch.sh) para gerar um arquivo .dot com a carga horária e créditos computados.
-
-- Use o *shell script* [gera-pngs.sh](gera-pngs.sh) para gerar 2 arquivos PNG do grafo.
-
 - Instale o pacote graphviz
   - ```shell
     sudo apt install graphviz
     ```
-- Gere as imagens da rede curricular    
-  - ```shell
-    bash gera-pngs.sh engtelecom.dot LOG-co-PRG1.dot
-    ```
+- O arquivo [engtelecom.dot](engtelecom.dot) contém o fonte da grade
 
+- Use o *shell script* [gera-svg.sh](gera-svg.sh) para gerar uma imagem SVG do grafo.
+  - ```shell
+    bash gera-svg.sh engtelecom.dot pagina-html/grade.svg
+    ```
+  - Isso vai criar um arquivo `grade.svg` no subdiretório `pagina-html`.
+
+## Servidor web local para carregar SVG com destaque em JavaScript
+
+Para permitir destacar somente as arestas de um determinado nó (ao clicar sobre o mesmo), é necessário exportar o grafo para `.svg` e usar um servidor web para ofertar os arquivos contidos no diretório `pagina-html`. 
+
+No computador pessoal é possível usar o servidor web que vem junto com o python3.
+
+```bash
+cd pagina-html
+python3 -m http.server
+```
+
+Feito isso, aponte o navegador para a URL: http://localhost:8000/?grafo=grade. 
+
+É possível ter mais de uma imagem `.svg` no diretório `pagina-html`. Para carregar diferentes `.svg`, basta informar o nome do arquivo, sem a extensão, para a variável `grafo`. 
+
+Por exemplo, no diretório `pagina-html` tem dois arquivos `.svg`: `grade.svg` e `novo.svg`. Sendo assim, para carregar o arquivo `novo.svg` basta informar a seguinte URL: http://localhost:8000/?grafo=novo.
+
+Se não for informado nenhum valor para a variável `grafo`, então será carregado por padrão o arquivo `grade.svg`.

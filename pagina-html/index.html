@@ -67,9 +67,13 @@
                  if (grade){
                      grade = grade + ".svg";
                  }else{
-                     grade = "comissao.svg";
+                     grade = $.getUrlVar('grade');
+                     if (grade){
+                        grade = grade + ".svg";
+                     }else{
+                        grade = "grade.svg";
+                     }
                  }
-                 console.info(grade);
                 $("#graph").graphviz({
                     url: grade, 
                     ready: function() {
