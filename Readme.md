@@ -11,6 +11,8 @@
     - [Graphviz (dot) language support for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Stephanvs.dot)
     - [Graphviz Preview](https://marketplace.visualstudio.com/items?itemName=EFanZh.graphviz-preview)
     - [Graphviz Interactive Preview](https://marketplace.visualstudio.com/items?itemName=tintinweb.graphviz-interactive-preview) (opcional)
+- [Pandoc](https://pandoc.org/) (opcional)
+    - Somente se for gerar o .dot a partir dos arquivos .DOCX
 
 ## Arquivos fonte e gerando imagens `.svg`
 
@@ -41,3 +43,29 @@ Feito isso, aponte o navegador para a URL: http://localhost:8000/?grafo=grade.
 Por exemplo, no diretório `pagina-html` tem dois arquivos `.svg`: `grade.svg` e `novo.svg`. Sendo assim, para carregar o arquivo `novo.svg` basta informar a seguinte URL: http://localhost:8000/?grafo=novo.
 
 Se não for informado nenhum valor para a variável `grafo`, então será carregado por padrão o arquivo `grade.svg`.
+
+## Gerando arquivo `.dot` a partir dos arquivos `.docx`
+
+É possível baixar o diretório `ementas` como um arquivo `.zip` a partir da pasta compartilhada no Google Drive. Para cada disciplina foi criado um arquivo `.docx` e estes arquivos estão organizados nos seguintes subdiretórios:
+
+```bash
+ementas
+|-- eixo-amarelo
+|-- eixo-azul
+|-- eixo-cinza
+|-- eixo-laranja
+|-- eixo-marrom
+|-- eixo-roxo
+|-- eixo-verde-claro
+`-- eixo-verde-escuro
+```
+
+Para gerar o arquivo `.dot` a partir dos arquivos contidos no subdiretório `ementas`, digite:
+
+```bash
+./scripts-gera-dot/gera-cadeia-requisitos.sh ementas saida.dot 
+```
+
+É necessário ter o aplicativo [pandoc](https://pandoc.org/) instalado.
+
+
