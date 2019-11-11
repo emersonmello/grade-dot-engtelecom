@@ -21,7 +21,7 @@ if [  $# -ne 2 ]; then
     echo -e "Sintaxe errada.\nInforme o diretório que contém os arquivox .DOCX e o nome do arquivo de saída DOT"
     echo -e "Ex: $0 ementas grade.dot\n"
     exit 1
-fi 
+fi
 
 if [ ! -d "$1" ]; then
     echo "Diretório de entrada não existe. Informar um diretório válido"
@@ -53,7 +53,7 @@ echo -e "\n// Pré-requisitos\n" >> "$2"
 IFS=$'\n'; set -f
 for f in $(find "$1" -name '*.docx'); do
 
-    arquivoTxT="$f.txt" 
+    arquivoTxT="$f.txt"
 
     # convertendo de DOCX para TXT
     pandoc -s "$f" -t plain -o "$arquivoTxT"
@@ -68,9 +68,9 @@ for f in $(find "$1" -name '*.docx'); do
 
     # pegando linha posterior da palavra PRÉ-REQUISITOS
     prereq=`grep -i "PRÉ-REQUISITOS" -A 1  "$arquivoTxT" | grep  -i -v "PRÉ-REQUISITOS"`
-    
+
     # verificando se tem pré-requisito
-    if [[ ! $prereq =~ "#" ]]; then 
+    if [[ ! $prereq =~ "#" ]]; then
         echo "{$prereq} -> $sigla" >> "$2"
     else
         echo "{} -> $sigla" >> "$2"
@@ -78,16 +78,16 @@ for f in $(find "$1" -name '*.docx'); do
 
     # pegando linha posterior da palavra  CO-REQUISITOS
     coreq=`grep -i "CO-REQUISITOS" -A 1  "$arquivoTxT" | grep  -i -v "CO-REQUISITOS"`
-    
+
     # verificando se tem co-requisito
-    if [[ ! $coreq =~ "#" ]]; then 
+    if [[ ! $coreq =~ "#" ]]; then
         echo "{$coreq} -> $sigla [color=\"#FF0000\" constraint=false]" >> "$2"
     fi
 
 done
 
 # Isso está amarrado com os nomes dos subdiretórios do google drive
-amarelo="#FFD700" 
+amarelo="#FFD700"
 azul="#007FFF"
 cinza="#808080"
 laranja="#FFA343"
@@ -102,7 +102,7 @@ for f in $(find "$1" -name '*.txt' |sort); do
 
     # pegando linha posterior da palavra SIGLA
     sigla=`grep -i "SIGLA" -A 1  "$f" | grep  -i -v "SIGLA"`
-    
+
     # pegando linha posterior das palavras CARGA HORÁRIA
     ch=`grep -E "^## CARGA HORÁRIA" -A 1  "$f" | grep -v -E "^## CARGA HORÁRIA"`
 
@@ -119,7 +119,7 @@ for f in $(find "$1" -name '*.txt' |sort); do
         *"marrom"*)
             cor=$marrom;;
         *"roxo"*)
-            cor=$roxo;;    
+            cor=$roxo;;
         *"verde-claro"*)
             cor=$verdeClaro;;
         *"verde-escuro"*)
@@ -142,14 +142,14 @@ unset IFS; set +f
 # 70% da CH atual, será preenchido pelo preprocess.gvpr
 echo "horasTCC [label=\"horasTCC\",  color=\"#8da3c3\", id=\"horasTCC\"]" >> "$2"
 
-# 60% da CH atual, será preenchido pelo preprocess.gvpr 
-echo "horasETO [label=\"horasETO\",  color=\"#8da3c3\", id=\"horasETO\"]" >> "$2" 
+# 60% da CH atual, será preenchido pelo preprocess.gvpr
+echo "horasETO [label=\"horasETO\",  color=\"#8da3c3\", id=\"horasETO\"]" >> "$2"
 
 # ADM tem 1980h como pré-requisito
 echo "horas1980 [label=\"1.980h\", color=\"#8da3c3\", id=\"horas1980\"]" >> "$2"
 
 
-echo -e "\n // Fases\n" >> "$2"
+echo -e "\n// Fases\n" >> "$2"
 
 
 for fase in `seq 1 10`; do
@@ -159,14 +159,10 @@ subgraph cluster_fase$fase {
       style=\"rounded\"
       bgcolor= \"#e6e6e6\"
       color = lightgrey
-    
+
 }"
     echo -e "$linha" >> "$2"
 done
 
 # fechando grafo
 echo -e "}\n" >> "$2"
-
-
-
-
