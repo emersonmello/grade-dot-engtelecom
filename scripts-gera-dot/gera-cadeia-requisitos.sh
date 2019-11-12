@@ -47,11 +47,11 @@ digraph EngTelecom {
 "
 
 echo -e "$cabecalho" >> "$2"
-echo -e "\n// Pré-requisitos\n" >> "$2"
+echo -e "\n    // Pré-requisitos\n" >> "$2"
 
 # definindo delimitador de campos para newline
 IFS=$'\n'; set -f
-for f in $(find "$1" -name '*.docx'); do
+for f in $(find "$1" -name '*.docx' | sort); do
 
     arquivoTxT="$f.txt"
 
@@ -71,9 +71,9 @@ for f in $(find "$1" -name '*.docx'); do
 
     # verificando se tem pré-requisito
     if [[ ! $prereq =~ "#" ]]; then
-        echo "{$prereq} -> $sigla" >> "$2"
+        echo "    {$prereq} -> $sigla" >> "$2"
     else
-        echo "{} -> $sigla" >> "$2"
+        echo "    {} -> $sigla" >> "$2"
     fi
 
     # pegando linha posterior da palavra  CO-REQUISITOS
@@ -81,7 +81,7 @@ for f in $(find "$1" -name '*.docx'); do
 
     # verificando se tem co-requisito
     if [[ ! $coreq =~ "#" ]]; then
-        echo "{$coreq} -> $sigla [color=\"#FF0000\" constraint=false]" >> "$2"
+        echo "    {$coreq} -> $sigla [color=\"#FF0000\" constraint=false]" >> "$2"
     fi
 
 done
@@ -96,7 +96,7 @@ roxo="#9678B6"
 verdeClaro="#77DD77"
 verdeEscuro="#339966"
 
-echo -e "\n// Propriedades dos nós\n">> "$2"
+echo -e "\n    // Propriedades dos nós\n">> "$2"
 
 for f in $(find "$1" -name '*.txt' |sort); do
 
@@ -134,33 +134,35 @@ for f in $(find "$1" -name '*.txt' |sort); do
         sigla="$sigla "
     fi
     # Vai gerar a seguinte saída: POO [ch=80, color="#339966", id=POO]
-    echo -e "$sigla [ch=$ch, color=\"$cor\", id=$sigla]" >> "$2"
+    echo -e "    $sigla [ch=$ch, color=\"$cor\", id=$sigla]" >> "$2"
 
 done
 unset IFS; set +f
 
 # 70% da CH atual, será preenchido pelo preprocess.gvpr
-echo "horasTCC [label=\"horasTCC\",  color=\"#8da3c3\", id=\"horasTCC\"]" >> "$2"
+echo "    horasTCC [label=\"horasTCC\",  color=\"#8da3c3\", id=\"horasTCC\"]" >> "$2"
 
 # 60% da CH atual, será preenchido pelo preprocess.gvpr
-echo "horasETO [label=\"horasETO\",  color=\"#8da3c3\", id=\"horasETO\"]" >> "$2"
+echo "    horasETO [label=\"horasETO\",  color=\"#8da3c3\", id=\"horasETO\"]" >> "$2"
 
 # ADM tem 1980h como pré-requisito
-echo "horas1980 [label=\"1.980h\", color=\"#8da3c3\", id=\"horas1980\"]" >> "$2"
+echo "    horas1980 [label=\"1.980h\", color=\"#8da3c3\", id=\"horas1980\"]" >> "$2"
 
 
-echo -e "\n// Fases\n" >> "$2"
+echo -e "\n    // Fases\n" >> "$2"
 
 
 for fase in `seq 1 10`; do
     linha="
-subgraph cluster_fase$fase {
-      label = \"Fase $fase\"
-      style=\"rounded\"
-      bgcolor= \"#e6e6e6\"
-      color = lightgrey
+    subgraph cluster_fase$fase {
+        label = \"Fase $fase\"
+        style=\"rounded\"
+        bgcolor= \"#e6e6e6\"
+        color = lightgrey
+        
+        // Disciplinas da fase
 
-}"
+    }"
     echo -e "$linha" >> "$2"
 done
 
