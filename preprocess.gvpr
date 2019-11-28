@@ -1,11 +1,27 @@
 // preprocess.gvpr
 // $ gvpr engtelecom.dot -c -f preprocess.gvpr -o saida-ch.dot
 
+// Documentação: https://www.mankier.com/1/gvpr#
+
 BEGIN { 
     int tot_ch = 0;  // carga horaria total do curso
     double tcc_ch = 0; // TCC1 tem como pre-requisito 70% da CH total
     double eto_ch = 0; // ETO tem como pre-requisito 60% da CH total
     int tot_n = 0; int tot_e = 0;
+
+    int totalPorCor[string]; // 8 cores      
+    int totalCredPorCor[string];
+    string cores[string];
+
+     // Cores dos eixos
+    cores["#FFD700"] = "AMARELO";
+    cores["#007FFF"] = "AZUL";
+    cores["#808080"] = "CINZA";
+    cores["#FFA343"] = "LARANJA";
+    cores["#9F8170"] = "MARROM";
+    cores["#9678B6"] = "ROXO";
+    cores["#77DD77"] = "VERDEC";
+    cores["#339966"] = "VERDEE";
 }
 
 BEG_G {
@@ -18,14 +34,18 @@ BEG_G {
 
         int creditos = no.ch/20;
 
-       // Só alterar o label de nós que possuem créditos > 0 
+        
+
+       // Só alterar o label que possuem créditos > 0 
         if (creditos > 0){
             no.label = sprintf("%s\n(%d)", no.id, creditos);
         }
 
-        // CH total do curso não comtabilizará TCC1, TCC2 e ETO
+        // CH total do curso não contabilizará TCC1, TCC2 e ETO
         if ((strcmp(no.id,"TCC1"))&&(strcmp(no.id,"TCC2"))&&(strcmp(no.id,"ETO")) ){
             tot_ch+=no.ch;
+            totalPorCor[no.color]++;
+            totalCredPorCor[no.color]+=creditos;
         }
 
         no = nxtnode(no);
@@ -59,7 +79,14 @@ BEG_G {
     label = sprintf("%s\n Carga horária total: %d (não inclui ETO, TCC1 e TCC2)",label,tot_ch);
 }
 END { 
-    printf ("//Carga horária total: %d \n", tot_ch);
+    printf ("\n//Carga horária total: %d \n", tot_ch);
     printf ("//Total de nós: %d \n", tot_n);
-    printf ("//Total de arestas: %d \n", tot_e);
+    printf ("//Total de arestas: %d \n\n", tot_e);
+
+    string elemento;
+    forr(totalPorCor[elemento]){
+        if (totalCredPorCor[elemento] > 0){
+            printf ("// %s:\t\t%d\t(disciplinas)  -  %d\t(créditos)\n", cores[elemento], totalPorCor[elemento], totalCredPorCor[elemento]);
+        }
+    }
 }
