@@ -67,7 +67,9 @@ for f in $(find "$1" -name '*.docx' | sort); do
     sigla=`grep -i "SIGLA" -A 1  "$arquivoTxT" | grep  -i -v "SIGLA"`
 
     # pegando linha posterior da palavra PRÉ-REQUISITOS
-    prereq=`grep -i "PRÉ-REQUISITOS" -A 1  "$arquivoTxT" | grep  -i -v "PRÉ-REQUISITOS"`
+    prereq=`grep -i "PRÉ-REQUISITOS" -A 1  "$arquivoTxT" | grep  -i -v "PRÉ-REQUISITOS" | sed 's/,/ /g'`
+    # ordenando a lista de pre-requisitos e removendo espaços extras
+    prereq=`echo $prereq |tr " " "\n" |sort|tr "\n" " " | awk '$1=$1'` 
 
     # verificando se tem pré-requisito
     if [[ ! $prereq =~ "#" ]]; then
