@@ -85,8 +85,16 @@ END {
 
     string elemento;
     forr(totalPorCor[elemento]){
+        string disciplina = sprintf("%d", totalPorCor[elemento]);
+        string credito = sprintf("%d", totalCredPorCor[elemento]);;
         if (totalCredPorCor[elemento] > 0){
-            printf ("// %s:\t\t%d\t(disciplinas)  -  %d\t(créditos)\n", cores[elemento], totalPorCor[elemento], totalCredPorCor[elemento]);
+            if (totalPorCor[elemento] < 10 ){
+                disciplina = sprintf("0%d", totalPorCor[elemento]);
+            }
+            if (totalCredPorCor[elemento] < 10){
+                credito = sprintf("0%d", totalCredPorCor[elemento]);;
+            }
+            printf("// %s:\t\t%s (disciplinas)  -  %s (créditos)\n", cores[elemento], disciplina, credito);
         }
     }
 }
