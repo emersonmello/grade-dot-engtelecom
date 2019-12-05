@@ -12,6 +12,7 @@
     - [Graphviz Preview](https://marketplace.visualstudio.com/items?itemName=EFanZh.graphviz-preview)
     - [Graphviz Interactive Preview](https://marketplace.visualstudio.com/items?itemName=tintinweb.graphviz-interactive-preview) (opcional)
 - [Pandoc](https://pandoc.org/) (opcional)
+    
     - Somente se for gerar o .dot a partir dos arquivos .DOCX
 
 ## Arquivos fonte e gerando imagens `.svg`
@@ -20,7 +21,7 @@
 
 - Use o *shell script* [gera-svg.sh](gera-svg.sh) para gerar uma imagem SVG do grafo.
   ```shell
-  bash gera-svg.sh engtelecom.dot pagina-html/grade.svg
+  bash gera-svg.sh ppc2015.dot pagina-html/grade.svg
   ```
   - Isso vai criar um arquivo `grade.svg` no subdiretório `pagina-html`.
   - Se desejar, veja mais sobre a [*graph pattern scanning and processing language* (gvpr) aqui](https://www.mankier.com/1/gvpr).
