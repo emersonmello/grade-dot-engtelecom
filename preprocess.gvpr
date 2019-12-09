@@ -60,10 +60,12 @@ BEG_G {
     graph_t subgraph = fstsubg($);
 
     while (subgraph != NULL) {
+        int disc_eixo = 0;
         int ch_eixo = 0;
         node_t n = fstnode(subgraph);
         while (n != NULL) {
             ch_eixo += n.ch;
+            disc_eixo++;
             if (strcmp(n.id,"horasTCC") == 0){
                 n.label = sprintf("%dh", tcc_ch);
             }
@@ -73,7 +75,8 @@ BEG_G {
 
             n = nxtnode_sg(subgraph, n);
         }
-        subgraph.label = sprintf("%s [%d h] - %d", subgraph.label, ch_eixo,(ch_eixo/20));
+        subgraph.label = sprintf("%s [%d h] - %d (cred) - %d (disc)", subgraph.label, ch_eixo,(ch_eixo/20), disc_eixo);
+        
         subgraph = nxtsubg(subgraph);
     }
     label = sprintf("%s\n Carga horária total: %d (não inclui ETO, TCC1 e TCC2)",label,tot_ch);
