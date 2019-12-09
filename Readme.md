@@ -17,7 +17,7 @@
 
 ## Arquivos fonte e gerando imagens `.svg`
 
-- O arquivo [engtelecom.dot](engtelecom.dot) contém o fonte da grade. Se desejar, veja mais sobre [DOT Language aqui](https://www.graphviz.org/documentation/).
+- O arquivo [ppc2015.dot](ppc2015.dot) contém o fonte da grade da Engenharia de Telecomunicações do PPC de 2015. Se desejar, veja mais sobre [DOT Language aqui](https://www.graphviz.org/documentation/).
 
 - Use o *shell script* [gera-svg.sh](gera-svg.sh) para gerar uma imagem SVG do grafo.
   ```shell
