@@ -1,0 +1,96 @@
+// ----------------------------------------------------------------- //
+// 2019-12-20 - Emerson Ribeiro de Mello
+// ----------------------------------------------------------------- //
+// gvpr origem.gv  -f supreprocess.gvpr -a POO -o saida.gv
+// ----------------------------------------------------------------- //
+BEGIN { 
+    int tot_ch = 0;  // carga horaria total do curso
+    double tcc_ch = 0; // TCC1 tem como pre-requisito 70% da CH total
+    double eto_ch = 0; // ETO tem como pre-requisito 60% da CH total
+    int tot_n = 0; int tot_e = 0;
+}
+BEG_G{
+    graph_t g = graph(ARGV[0], "D");
+    node_t no = node($,ARGV[0]);
+    
+    // ----------------------------------------------------------------- //
+    // Alterando as propriedades do nó passado como argumento de linha
+    // ----------------------------------------------------------------- //
+    cor = aget(no,"color");
+    aset(no,"fillcolor",no.color);
+    aset(no,"color","");
+    aset(no,"style","filled,bold");
+    copy(g, no); // copiando o nó passado como argumento de linha de comando
+    // ----------------------------------------------------------------- //
+    
+    g.bgcolor="#FFFFFF00"; // deixando transparente a cor de fundo do PNG a ser gerado
+    g.nodesep="0.3";
+	g.pad="0.2";
+    g.label="";
+
+    // ----------------------------------------------------------------- //
+    // Trecho para calcular a CH que é pré-requisito de TCC1 e Estágio   //
+    // ----------------------------------------------------------------- //
+    node_t nn = fstnode($);
+    tot_n = nNodes($G);
+    tot_e = nEdges($G);
+    while (nn != NULL){
+        // CH total do curso não contabilizará TCC1, TCC2 e ETO
+        if ((strcmp(nn.id,"TCC1"))&&(strcmp(nn.id,"TCC2"))&&(strcmp(nn.id,"ETO")) ){
+            tot_ch+=nn.ch;
+        }
+        nn = nxtnode(nn);
+    }
+    //CEPE 70% da CH atual
+    tcc_ch = tot_ch * 0.7;
+    //CEPE 60% da CH atual
+    eto_ch = tot_ch * 0.6;
+    graph_t subgraph = fstsubg($);
+    while (subgraph != NULL) {
+        node_t n = fstnode(subgraph);
+        while (n != NULL) {
+            if (strcmp(n.id,"horasTCC") == 0){
+                n.label = sprintf("%dh", tcc_ch);
+            }
+            if (strcmp(n.id,"horasETO") == 0){
+                n.label = sprintf("%dh", eto_ch);
+            }
+            n = nxtnode_sg(subgraph, n);
+        }
+        subgraph = nxtsubg(subgraph);
+    }
+    // ----------------------------------------------------------------- //
+}
+// ----------------------------------------------------------------- //
+// percorrendo todas as arestas para copiar os nós sucessores e 
+// predecessores do nó fornecido como argumento de linha de comando
+// ----------------------------------------------------------------- //
+E{
+    // Se o nó for cabeça da aresta, então copie a cauda para o novo grafo
+    if (head.name == ARGV[0]){
+        copy(g, tail);
+        // Alterando as propriedades de arcos que indicam correquisito
+        if ($.constraint){
+            aset($,"label","correquisito");
+            aset($,"color","black");
+            aset($,"style","dashed");
+            aset($,"constraint","true");
+        }
+        copy(g, $);
+    }
+    // Se o nó for a cauda da aresta, então copie a cabeça para o novo grafo
+    if (tail.name == ARGV[0]){
+        copy(g, head);
+        // Alterando as propriedades de arcos que indicam correquisito
+        if ($.constraint){
+            aset($,"label","correquisito");
+            aset($,"color","black");
+            aset($,"style","dashed");
+            aset($,"constraint","true");
+        }
+        copy(g, $);
+    }
+}
+END_G {
+    $O = g; // fazendo com que a saída seja o grafo que fora montado
+}
