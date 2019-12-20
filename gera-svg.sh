@@ -9,7 +9,7 @@ if [ $# -lt 1 ]; then
     exit 1
 fi 
 
-if [ ! -f preprocess.gvpr ]; then
+if [ ! -f gvpr-scripts/preprocess.gvpr ]; then
     echo "Arquivo 'preprocess.gvpr' com regras de processamento não foi encontrado."
     exit 1
 fi
@@ -25,8 +25,8 @@ if [ $# -eq 2 ]; then
         echo "Nome do arquivo de saída não pode ser igual ao nome do arquivo de entrada"
         exit 1
     fi 
-    gvpr "$1" -c -f preprocess.gvpr | dot -Tsvg > "$2"
+    gvpr "$1" -c -f gvpr-scripts/preprocess.gvpr | dot -Tsvg > "$2"
     exit 0
 fi
 
-gvpr "$1" -c -f preprocess.gvpr
+gvpr "$1" -c -f gvpr-scripts/preprocess.gvpr

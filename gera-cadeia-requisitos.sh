@@ -3,6 +3,10 @@
 
 # Esse script pega um conjunto de arquivos .DOCX e gera a cadeia de pré-requisitos com a sintaxe da DOT Language
 
+# O script também gera um arquivo .TXT tendo em cada linha a sigla de cada disciplina. Esse arquivo .TXT
+# é usado pelo outro script gera-sucessores-predecessores.sh para gerar um arquivo PNG por disciplina, o qual
+# contém todos os nós sucessores e predecessores da disciplina.
+
 # As cores para cada nó depende do subdiretório onde o arquivo TXT de cada disciplina está salvo
 
 # ATENÇÃO: esse script depende da seguinte estrutura de diretórios
@@ -41,10 +45,16 @@ digraph EngTelecom {
     label =\"Engenharia de Telecomunicações\"
     labelloc = t
     pad=\"0.5\"
+    bgcolor=\"#FFFFFF00\"
     graph [nodesep=0.3, ranksep=1.3, fontname=\"helvetica Neue Ultra Light\", fontcolor=\"#000000\", fontsize=25]
     node [shape=\"circle\", width=\".8\", style=\"filled\", labelloc=c, fontname=\"helvetica Neue Ultra Light bold\", fixedsize=true]
     edge [color=\"#000000\", penwidth=\"2\", fontname=\"helvetica Neue Ultra Light\"]
 "
+
+arquivodisciplinasTXT="$2.txt"
+
+echo -n > "$arquivodisciplinasTXT"
+echo -n > "$2"
 
 echo -e "$cabecalho" >> "$2"
 echo -e "\n    // Pré-requisitos\n" >> "$2"
@@ -65,6 +75,10 @@ for f in $(find "$1" -name '*.docx' | sort); do
 
     # pegando linha posterior da palavra SIGLA
     sigla=`grep -i "SIGLA" -A 1  "$arquivoTxT" | grep  -i -v "SIGLA"`
+
+    # adicionando sigla no arquivo TXT que servirá de entrada para 
+    # o script gera-sucessores-predecessores.sh
+    echo $sigla >> "$arquivodisciplinasTXT"
 
     # pegando linha posterior da palavra PRÉ-REQUISITOS
     prereq=`grep -i "PRÉ-REQUISITOS" -A 1  "$arquivoTxT" | grep  -i -v "PRÉ-REQUISITOS" | sed 's/,/ /g'`
