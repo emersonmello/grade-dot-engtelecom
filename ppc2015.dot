@@ -2,7 +2,6 @@ digraph EngTelecom {
     layout = dot
     label ="PPC 2015 Engenharia de Telecomunicações"
     labelloc = t
-    // bgcolor="#2e3e56"
 	  pad="0.5" /* add padding round the edge of the graph */
     graph [nodesep=0.3, ranksep=1.3, fontname="helvetica Neue Ultra Light", fontcolor="#000000", fontsize=25]
     node [shape="circle", width=".8", style="filled", labelloc=c, fontname="helvetica Neue Ultra Light bold", fixedsize=true]
@@ -10,34 +9,6 @@ digraph EngTelecom {
     edge [color="#000000", penwidth="2", fontname="helvetica Neue Ultra Light"]
 
     // Pré-requisitos
-    
-    // // deixando as disciplinas sem pré-requisito no mesmo nível do grafo
-    // // remover esse bloco quando forem colocadas nos subgraph das fases
-    // // { 
-    // //   rank=same
-    //   // laranja
-    //   {} -> DES
-    //   {} -> ESC
-    //   {} -> PTG
-    //   {} -> QMC1
-    //   {} -> SUS
-    //   {} -> CAL1
-    //   {} -> GAL
-
-    //   // cinza
-    //   {} -> PJI1
-
-    //   // marrrom
-    //   {} -> ELD1
-
-    //   // verde escuro
-    //   {} -> LOG
-
-    // // }
-
-    // // Eixo laranja
-
-
 
     // fase 2
     {CAL1} -> CAL2
